@@ -1,0 +1,48 @@
+<FIXML>
+    <TrdCaptRpt
+                BizDt="2011-02-16"
+                TrdRptStat="0"
+                CopyMsgInd="Y"
+                ExecID="663456"
+                LastPx="65.60"
+                LastQty="100"
+                MtchStat="0"
+                VenuTyp="E"
+                RptID="1"
+                RptTyp="0"
+                TrdID="4666751"
+                TransTyp="0"
+                TrdDt="2011-02-16"
+                TrdTyp="0"
+                TxnTm="2011-02-16T10:05:00-04:00">
+        <Hdr
+                SID="ICE"
+                TID="TMT"
+                Snt="2010-02-16T10:05:30-04:00"/>
+        <Instrmt
+                SecTyp="FUT"
+                Exch="IFEU"
+                ID="B"
+                MMY="201103"/>
+        <RptSide
+                ClOrdID="12345678910"
+                ClOrdID2="45678910"
+                OrdID="78139812"
+                AgrsrInd="Y"
+                InptSrc="ICE"
+                InptDev="ICE"
+                CustCpcty="4"
+                Side="2">
+            <Pty ID="IFEU" R="22"/>
+            <Pty ID=" ICEU" R="21"/>
+            <Pty ID="TMT" R="1"/>
+            <Pty ID="CMT" R="4"/>
+            <Pty ID="TRD" R="12"/>
+            <Pty ID="OP-ID" R="44"/>
+            <Pty ID="ACCT123" R="24"/>
+            <Pty ID="S" R="38">
+                <Sub ID="1" Typ="26"/>
+            </Pty>
+        </RptSide>
+    </TrdCaptRpt>
+</FIXML>

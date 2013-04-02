@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Vijaya Manne (ICE) -->
+<!--
+	- - - - - - - - - - - - - - - - - - - - - - - - - -
+    Generated 20070103
+	- - - - - - - - - - - - - - - - - - - - - - - - - -
+	-->
+<!--
+    FIXML 5.0
+    Copyright 2003-2007 FIX Protocol Limited.  All rights reserved.
+
+    This Schema represents FIXML vocabulary based on version 5.0 of the FIX Protocol
+
+    Comments should be posted on the FIX protocol web-site at www.fixprotocol.org
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.fixprotocol.org/FIXML-5-0-SP2"
+           xmlns:fm="http://www.fixprotocol.org/FIXML-5-0-SP2/METADATA"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.fixprotocol.org/FIXML-5-0-SP2/METADATA fixml-metadata-5-0-SP2.xsd"
+           targetNamespace="http://www.fixprotocol.org/FIXML-5-0-SP2"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+	<xs:include schemaLocation="fixml-components-impl-5-0-SP2.xsd"/>
+
+	<xs:attributeGroup name="ShortCodeRequestAttributes">
+		<xs:attribute name="ReqID" type="TradeRequestID_t" use="required"/>
+		<xs:attribute name="TransTyp" type="UpdateAction_enum_t" use="optional"/>
+	</xs:attributeGroup>
+
+	<xs:complexType name="ShortCodeReportRequest_message_t" final="#all">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ShortCodeReportRequest
+			  </xs:documentation>
+			<xs:appinfo>
+				<fm:Xref Protocol="FIX" name="ShortCodeReportRequest" ComponentType="Message"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Abstract_message_t">
+				<xs:group ref="ShortCodePartyGrpElements"/>
+				<xs:attributeGroup ref="ShortCodeRequestAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="ShortCodeReportReq" type="ShortCodeReportRequest_message_t" substitutionGroup="Message" final="#all"/>
+
+
+	<xs:complexType name="ShortCodeUpdate_message_t" final="#all">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ShortCodeRequest
+			  </xs:documentation>
+			<xs:appinfo>
+				<fm:Xref Protocol="FIX" name="ShortCodeRequest" ComponentType="Message"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Abstract_message_t">
+				<xs:group ref="ShortCodeElements"/>
+				<xs:attributeGroup ref="ShortCodeRequestAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="UpdateShortCodes" type="ShortCodeUpdate_message_t" substitutionGroup="Message" final="#all"/>
+
+	<xs:attributeGroup name="ShortCodeAttributes">
+		<xs:attribute name="ShortCodeId" type="ShortCodeID_t" use="optional"/>
+		<xs:attribute name="ShortCode" type="Code_t" use="optional"/>
+		<xs:attribute name="CustCpcty" type="CustOrderCapacity_t" use="optional"/>
+		<xs:attribute name="ExpireTime" type="ExpireTime_t" use="optional"/>
+		<xs:attribute name="CreateTime" type="LastUpdateTime_t" use="optional"/>
+		<xs:attribute name="autherizedUser" type="Username_t" use="optional"/>
+	</xs:attributeGroup>
+	
+	<xs:group name="ShortCodeGrpElements">
+		<xs:sequence>
+			<xs:element name="Instrmt" type="Instrument_Block_t" minOccurs="0" maxOccurs="1"/>
+			<xs:group ref="ShortCodePartyGrpElements"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:group name="ShortCodePartyGrpElements">
+		<xs:sequence>
+			<xs:element name="Pty" type="Parties_Block_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	
+	<xs:complexType name="ShortCode_message_t" final="#all">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">Short code message
+			  </xs:documentation>
+			<xs:appinfo>
+				<fm:Xref Protocol="FIX" name="ShortCodeReport" ComponentType="Message"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Abstract_message_t">
+				<xs:group ref="ShortCodeGrpElements"/>
+				<xs:attributeGroup ref="ShortCodeAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:element name="ShortCd" type="ShortCode_message_t" substitutionGroup="Message" final="#all"/>
+	
+	<xs:group name="ShortCodeElements">
+		<xs:sequence>
+			<xs:element name="ShortCd" type="ShortCode_message_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+
+	<xs:attributeGroup name="ShortCodeRequestAckAttributes">
+		<xs:attribute name="ReqID" type="TradeRequestID_t" use="required"/>
+		<xs:attribute name="ReqStat" type="TradeRequestStatus_t" use="required"/>
+		<xs:attribute name="ShortCdRptRejRsn" type="ShortCodeRejectReason_enum_t" use="optional"/>
+		<xs:attribute name="Txt" type="Text_t" use="optional"/>
+	</xs:attributeGroup>
+
+	<xs:complexType name="ShortCodeResponse_message_t" final="#all">
+		<xs:annotation>
+			<xs:documentation xml:lang="en">ShortCodeResponse
+			  </xs:documentation>
+			<xs:appinfo>
+				<fm:Xref Protocol="FIX" name="ShortCodeResponse" ComponentType="Message"/>
+			</xs:appinfo>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="Abstract_message_t">
+				<xs:group ref="ShortCodeElements"/>
+				<xs:attributeGroup ref="ShortCodeRequestAckAttributes"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
+	<xs:element name="ShortCodeResponse" type="ShortCodeResponse_message_t" substitutionGroup="Message" final="#all"/>
+
+		
+</xs:schema>
