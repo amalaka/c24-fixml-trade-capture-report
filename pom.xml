@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>c24-fixml</groupId>
   <artifactId>demo</artifactId>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>c24-fixml-trade-capture-report</name>
   
