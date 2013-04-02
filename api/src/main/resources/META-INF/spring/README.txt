@@ -1,0 +1,1 @@
+All spring contexts in this directory root.
