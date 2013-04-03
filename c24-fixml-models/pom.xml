@@ -1,14 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
+<project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <parent>
+        <artifactId>c24-fixml-sample</artifactId>
+        <groupId>c24-fixml-sample</groupId>
+        <version>1.0</version>
+    </parent>
     
     <modelVersion>4.0.0</modelVersion>
-    <groupId>c24-fixml-sample</groupId>
-    
-    <artifactId>model</artifactId>
-    <packaging>jar</packaging>
+    <groupId>c24-fixml-models</groupId>
+    <artifactId>c24-fixml-models</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
-    <name>model</name>
 
     <properties>
         <c24.api.version>4.2.1</c24.api.version>

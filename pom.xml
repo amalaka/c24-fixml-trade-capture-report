@@ -3,15 +3,14 @@
     
     <modelVersion>4.0.0</modelVersion>
     <groupId>c24-fixml-sample</groupId>
-    
-    <artifactId>demo</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>c24-fixml-sample</artifactId>
     <version>1.0</version>
+    <packaging>pom</packaging>
     <name>c24-fixml-sample</name>
 
     <modules>
-        <module>model</module>
-        <module>api</module>
+        <module>c24-fixml-models</module>
+        <module>c24-fixml-api</module>
     </modules>
     
 </project>
