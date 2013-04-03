@@ -10,8 +10,10 @@
     <properties>
         <c24.api.version>4.2.1</c24.api.version>
         <c24.xsd.directory>xsd</c24.xsd.directory>
-        <c24.imported.schema.directory>target/generated/dod</c24.imported.schema.directory>
+        <c24.imported.schema.directory>model</c24.imported.schema.directory>
         <c24.deployment.directory>target/generated/deployment</c24.deployment.directory>
+        <compass.xsd>compass.xsd</compass.xsd>
+        <compass.dod>compass.dod</compass.dod>
     </properties>
 
   <dependencies>
@@ -31,6 +33,21 @@
   <build>
     <plugins>
         <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>2.5</version>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>${c24.imported.schema.directory}</directory>
+                  <includes>
+                    <include>${compass.dod}</include>
+                  </includes>
+                  <followSymlinks>false</followSymlinks>
+                </fileset>
+              </filesets>
+            </configuration>
+          </plugin>
+        <plugin>
             <groupId>biz.c24.io.maven</groupId>
             <artifactId>c24-maven-plugin</artifactId>
             <version>4.1.3</version>
@@ -44,8 +61,7 @@
                                 <fileSet>
                                     <directory>${basedir}/${c24.xsd.directory}/</directory>
                                     <includes>
-                                        <name>compass.xsd</name>
-                                        <name>fixml-main-5-0-SP2.xsd</name>
+                                        <name>${compass.xsd}</name>
                                     </includes>
                                 </fileSet>
                             </import>
@@ -56,8 +72,7 @@
                                 <fileSet>
                                     <directory>${basedir}/${c24.imported.schema.directory}</directory>
                                     <includes>
-                                        <name>compass.dod</name>
-                                        <name>fixml-main-5-0-SP2.dod</name>
+                                        <name>${compass.dod}</name>
                                     </includes>
                                 </fileSet>
                             </deploy>
