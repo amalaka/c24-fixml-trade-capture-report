@@ -5,4 +5,7 @@
 
 *.iml
 
-api/target
+c24-fixml-models/target
+
+c24-fixml-api/target
+
