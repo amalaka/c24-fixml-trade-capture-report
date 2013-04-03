@@ -1,12 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>c24-fixml</groupId>
+  <groupId>c24-sample-template</groupId>
   <artifactId>model</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>c24-fixml-model</name>
+  <name>c24-sample-template-model</name>
 
+    <properties>
+        <c24.api.version>4.2.1</c24.api.version>
+        <c24.xsd.directory>xsd</c24.xsd.directory>
+        <c24.imported.schema.directory>target/generated/dod</c24.imported.schema.directory>
+        <c24.deployment.directory>target/generated/deployment</c24.deployment.directory>
+    </properties>
 
   <dependencies>
     <dependency>
@@ -15,10 +21,54 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>biz.c24.io</groupId>
+        <artifactId>c24-io-api</artifactId>
+        <version>${c24.api.version}</version>
+    </dependency>
   </dependencies>
   
   <build>
     <plugins>
+        <plugin>
+            <groupId>biz.c24.io.maven</groupId>
+            <artifactId>c24-maven-plugin</artifactId>
+            <version>4.1.3</version>
+            <executions>
+                <execution>
+                    <phase>generate-sources</phase>
+                    <configuration>
+                        <session>
+                            <import>
+                                <toDir>${basedir}/${c24.imported.schema.directory}</toDir>
+                                <fileSet>
+                                    <directory>${basedir}/${c24.xsd.directory}/</directory>
+                                    <includes>
+                                        <name>compass.xsd</name>
+                                        <name>fixml-main-5-0-SP2.xsd</name>
+                                    </includes>
+                                </fileSet>
+                            </import>
+                            <deploy>
+                                <licenseFile>${license.file}</licenseFile>
+                                <toDir>${basedir}/${c24.deployment.directory}</toDir>
+                                <ignoreTargetPackage>true</ignoreTargetPackage>
+                                <fileSet>
+                                    <directory>${basedir}/${c24.imported.schema.directory}</directory>
+                                    <includes>
+                                        <name>compass.dod</name>
+                                        <name>fixml-main-5-0-SP2.dod</name>
+                                    </includes>
+                                </fileSet>
+                            </deploy>
+                        </session>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+        </plugin>
        <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
