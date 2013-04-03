@@ -1,5 +1,7 @@
 package biz.c24.io.fixml.sample.configuration;
 
+import com.smoke.test.ConsolePrinter;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
@@ -13,5 +15,8 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 public class C24iOConfiguration {
  
-    // Declare all beans in here.
+    @Bean (name = "debug")
+    public ConsolePrinter getConsolePrinter() {
+        return new ConsolePrinter();
+    }
 }
