@@ -29,7 +29,7 @@
     <integration:service-activator 
         input-channel="c24-store-channel"
         output-channel="c24-transformer-channel"
-        ref="debug"/>
+        ref="mongoDBWriter" method="store"/>
 
     <integration:channel id="c24-transformer-channel" datatype="java.lang.String"/>
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="c24-cache-channel">

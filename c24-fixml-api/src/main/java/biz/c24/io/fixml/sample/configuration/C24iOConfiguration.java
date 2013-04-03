@@ -1,5 +1,6 @@
 package biz.c24.io.fixml.sample.configuration;
 
+import biz.c24.io.fixml.sample.storage.MongoDbWriter;
 import com.smoke.test.ConsolePrinter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,4 +20,9 @@ public class C24iOConfiguration {
     public ConsolePrinter getConsolePrinter() {
         return new ConsolePrinter();
     }
+    
+    @Bean (name = "mongoDBWriter")
+    public MongoDbWriter getMongoDbWriter() {
+        return new MongoDbWriter("myServer", "1521");
+    } 
 }
