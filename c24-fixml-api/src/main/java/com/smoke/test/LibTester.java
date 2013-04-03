@@ -1,5 +1,8 @@
 package com.smoke.test;
 
+import biz.c24.io.api.data.Element;
+import com.jpmc.ib.fopp.compass.xml.AllocatedExecutionElement;
+
 /**
  * Created on behalf of C24 Technologies Ltd.
  *
@@ -8,5 +11,5 @@ package com.smoke.test;
  */
 public class LibTester {
     
-    //private AllocatedExecutionElement fe = AllocatedExecutionElement.getInstance();
+    private Element fe = AllocatedExecutionElement.getInstance();
 }
