@@ -49,8 +49,7 @@ public class C24iOConfiguration {
 
     @Bean(name = "fixmlModel")
     public C24Model getFixmlModel() {
-        // TODO: get the correct element name for the FIXML element.
-        Element element = new Element();
+        Element element = new biz.c24.io.fixml50.FIXML5_0DocumentRootElement();
         return new C24Model(element);
     }
 

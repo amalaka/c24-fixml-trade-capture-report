@@ -47,6 +47,20 @@
             <version>${c24-fixml-model.version}</version>
         </dependency>
         <dependency>
+            <groupId>biz.c24.io.fixml</groupId>
+            <artifactId>FixML-5</artifactId>
+            <version>5SP2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/biz.c24.io.fixml50.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>biz.c24.io.fixml-proto</groupId>
+            <artifactId>FixML-5-proto</artifactId>
+            <version>5SP2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/org.fixprotocol.fixml50.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>biz.c24.io.spring</groupId>
             <artifactId>c24-spring-core</artifactId>
             <version>${c24.spring.version}</version>
