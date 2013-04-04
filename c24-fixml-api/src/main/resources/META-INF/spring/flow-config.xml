@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:integration="http://www.springframework.org/schema/integration"
-    xmlns:file="http://www.springframework.org/schema/integration/file"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:integration="http://www.springframework.org/schema/integration"
+       xmlns:c24="http://schema.c24.biz/spring-integration"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/integration
-    http://www.springframework.org/schema/integration/spring-integration-2.2.xsd
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://schema.c24.biz/spring-integration
+    http://schema.c24.biz/spring-integration.xsd
     http://www.springframework.org/schema/integration/file
-    http://www.springframework.org/schema/integration/file/spring-integration-file-2.2.xsd">
+    http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
 
     <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>-->
 
-    <file:inbound-channel-adapter 
-        id="file-reading-adapter"
-        directory="classpath:data-fixtures"
-        channel="c24-parser-channel"
-        auto-startup="false">
+    <file:inbound-channel-adapter
+            id="file-reading-adapter"
+            directory="classpath:data-fixtures"
+            channel="c24-parser-channel"
+            auto-startup="false">
         <integration:poller id="poller" fixed-delay="500" max-messages-per-poll="50"/>
     </file:inbound-channel-adapter>
 
     <integration:channel id="c24-parser-channel" datatype="java.io.File"/>
     <integration:chain id="parse-chain" input-channel="c24-parser-channel" output-channel="c24-store-channel">
         <file:file-to-string-transformer/>
+        <c24:unmarshalling-transformer id="c24io-fixml-parser" 
+                                       source-factory-ref="textualSourceFactory"
+                                       model-ref="fixmlModel"/>
         <!-- Insert C24 iO parse/bind operation, check parse failures etc. -->
         <!-- Call c24 validation -->
         <!-- Optional: route failures into exception management channel -->
     </integration:chain>
-    
+
     <integration:channel id="c24-store-channel"/>
-    <integration:service-activator 
-        input-channel="c24-store-channel"
-        output-channel="c24-transformer-channel"
-        ref="mongoDBWriter" method="store"/>
+    <integration:service-activator
+            input-channel="c24-store-channel"
+            output-channel="c24-transformer-channel"
+            ref="mongoDBWriter" method="store"/>
 
     <integration:channel id="c24-transformer-channel" datatype="java.lang.String"/>
-    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="c24-cache-channel">
+    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel"
+                       output-channel="c24-cache-channel">
         <integration:service-activator ref="debug"/>
         <!-- Insert C24 iO transform -->
         <!-- Call c24 validation -->
@@ -44,7 +51,7 @@
 
     <integration:channel id="c24-cache-channel"/>
     <integration:service-activator
-        input-channel="c24-cache-channel"
-        ref="debug"/>
-    
+            input-channel="c24-cache-channel"
+            ref="debug"/>
+
 </beans>

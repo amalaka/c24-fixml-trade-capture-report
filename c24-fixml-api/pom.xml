@@ -7,7 +7,29 @@
     <version>1.0</version>
     <name>c24-fixml-api</name>
 
+    <developers>
+        <developer>
+            <name>Matt Vickery</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>matt.vickery(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Enrico Musuruana</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>enrico.musuruana(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
+        <c24.spring.version>2.2.1</c24.spring.version>
         <org.springframework.version>3.2.2.RELEASE</org.springframework.version>
         <org.spring.integration.version>2.2.3.RELEASE</org.spring.integration.version>
         <junit.version>3.8.1</junit.version>
@@ -23,6 +45,21 @@
             <artifactId>model</artifactId>
             <!--<artifactId>c24-fixml-models</artifactId>-->
             <version>${c24-fixml-model.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>biz.c24.io.spring</groupId>
+            <artifactId>c24-spring-core</artifactId>
+            <version>${c24.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>biz.c24.io.spring</groupId>
+            <artifactId>c24-spring-integration</artifactId>
+            <version>${c24.spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.10.1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
