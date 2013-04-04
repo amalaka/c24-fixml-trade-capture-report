@@ -23,6 +23,9 @@
     <integration:channel id="c24-parser-channel" datatype="java.io.File"/>
     <integration:chain id="parse-chain" input-channel="c24-parser-channel" output-channel="c24-store-channel">
         <file:file-to-string-transformer/>
+        <!-- Insert C24 iO parse/bind operation, check parse failures etc. -->
+        <!-- Call c24 validation -->
+        <!-- Optional: route failures into exception management channel -->
     </integration:chain>
     
     <integration:channel id="c24-store-channel"/>
@@ -34,6 +37,9 @@
     <integration:channel id="c24-transformer-channel" datatype="java.lang.String"/>
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="c24-cache-channel">
         <integration:service-activator ref="debug"/>
+        <!-- Insert C24 iO transform -->
+        <!-- Call c24 validation -->
+        <!-- Optional: route failures into exception management channel -->
     </integration:chain>
 
     <integration:channel id="c24-cache-channel"/>
