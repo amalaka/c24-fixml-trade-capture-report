@@ -12,23 +12,25 @@
     http://schema.c24.biz/spring-integration.xsd
     http://www.springframework.org/schema/integration/file
     http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
-    
-    <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>-->
+
+    <integration:message-history/>
 
     <file:inbound-channel-adapter
             id="file-reading-adapter"
             directory="classpath:data-fixtures"
             channel="c24-parser-channel"
-            auto-startup="false">
+            auto-startup="true">
         <integration:poller id="poller" fixed-delay="500" max-messages-per-poll="50"/>
     </file:inbound-channel-adapter>
 
     <integration:channel id="c24-parser-channel" datatype="java.io.File"/>
     <integration:chain id="parse-chain" input-channel="c24-parser-channel" output-channel="c24-store-channel">
         <file:file-to-string-transformer/>
-        <c24:unmarshalling-transformer id="c24io-fixml-parser" 
+        <integration:service-activator ref="debug"/>
+        <c24:unmarshalling-transformer id="c24io-fixml-parser"
                                        source-factory-ref="textualSourceFactory"
                                        model-ref="fixmlModel"/>
+        <integration:service-activator ref="debug"/>
         <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
         <integration:service-activator ref="debug"/>
         <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
@@ -54,7 +56,7 @@
     <integration:service-activator
             input-channel="c24-cache-channel"
             ref="debug"/>
-    
+
     <integration:channel id="exception-channel">
         <integration:queue capacity="50"/>
     </integration:channel>

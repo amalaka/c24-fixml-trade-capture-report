@@ -26,7 +26,7 @@ public class FlowTest
     public void testInputHandler()
     {
         try {
-            Thread.sleep(10000);
+            Thread.sleep(25000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

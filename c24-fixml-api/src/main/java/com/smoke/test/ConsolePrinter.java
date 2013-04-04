@@ -10,8 +10,9 @@ import org.springframework.integration.Message;
 public class ConsolePrinter
 {
 
-    public void service(Message<?> message)
+    public Message<?> service(Message<?> message)
     {
         System.out.println("Pulled: " + message.getPayload().toString());
+        return message;
     }
 }
