@@ -26,15 +26,11 @@
     <integration:channel id="c24-parser-channel" datatype="java.io.File"/>
     <integration:chain id="parse-chain" input-channel="c24-parser-channel" output-channel="c24-store-channel">
         <file:file-to-string-transformer/>
-        <integration:service-activator ref="debug"/>
         <c24:unmarshalling-transformer id="c24io-fixml-parser"
                                        source-factory-ref="xmlSourceFactory"
                                        model-ref="fixmlModel"/>
-        <integration:service-activator ref="debug"/>
         <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
-        <integration:service-activator ref="debug"/>
         <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
-        <integration:service-activator ref="debug"/>
     </integration:chain>
 
     <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
