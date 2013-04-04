@@ -34,7 +34,7 @@ public class C24iOConfiguration {
         return new ConsolePrinter();
     }
 
-    @Bean(name = "mongoDBFIXMLCollectionWriter")
+    @Bean(name = "mongoDbFixMlCollectionWriter")
     public MongoDbWriter getMongoDbWriter() throws UnknownHostException {
         MongoDbWriter mongoDbWriter = new MongoDbWriter(getFIXMLCollection(), getJsonSink());
         return mongoDbWriter;

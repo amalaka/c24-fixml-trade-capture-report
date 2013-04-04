@@ -12,7 +12,7 @@
     http://schema.c24.biz/spring-integration.xsd
     http://www.springframework.org/schema/integration/file
     http://www.springframework.org/schema/integration/file/spring-integration-file.xsd">
-
+    
     <!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>-->
 
     <file:inbound-channel-adapter
@@ -29,16 +29,17 @@
         <c24:unmarshalling-transformer id="c24io-fixml-parser" 
                                        source-factory-ref="textualSourceFactory"
                                        model-ref="fixmlModel"/>
-        <!-- Insert C24 iO parse/bind operation, check parse failures etc. -->
-        <!-- Call c24 validation -->
-        <!-- Optional: route failures into exception management channel -->
+        <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
+        <integration:service-activator ref="debug"/>
+        <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
+        <integration:service-activator ref="debug"/>
     </integration:chain>
 
-    <integration:channel id="c24-store-channel"/>
+    <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
     <integration:service-activator
             input-channel="c24-store-channel"
             output-channel="c24-transformer-channel"
-            ref="mongoDBWriter" method="store"/>
+            ref="mongoDbFixMlCollectionWriter" method="store"/>
 
     <integration:channel id="c24-transformer-channel" datatype="java.lang.String"/>
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel"
@@ -53,5 +54,9 @@
     <integration:service-activator
             input-channel="c24-cache-channel"
             ref="debug"/>
+    
+    <integration:channel id="exception-channel">
+        <integration:queue capacity="50"/>
+    </integration:channel>
 
 </beans>
