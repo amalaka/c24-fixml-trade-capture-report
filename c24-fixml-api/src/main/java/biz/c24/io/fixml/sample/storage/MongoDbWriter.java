@@ -31,9 +31,11 @@ public class MongoDbWriter {
             BasicDBObject obj = (BasicDBObject) JSON.parse(writer.toString());
             mongoDBCollection.save(obj);
         } catch (JSONParseException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
     }
 }
