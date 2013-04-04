@@ -11,7 +11,7 @@
     </appender>
 
     <appender name="file" class="org.apache.log4j.FileAppender">
-        <param name="file" value="test-fixml-sample.log"/>
+        <param name="file" value="fixml-sample.log"/>
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{ISO8601} [%t] %p %c %x - %m%n"/>
         </layout>
