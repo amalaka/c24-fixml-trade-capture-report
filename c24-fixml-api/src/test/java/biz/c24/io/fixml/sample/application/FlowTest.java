@@ -22,6 +22,10 @@ public class FlowTest
     @Qualifier(value = "c24-parser-channel")
     MessageChannel parseChannel;
 
+    public FlowTest() {
+        System.setProperty("IO_HOME", "/Applications/C24");
+    }
+
     @Test
     public void testInputHandler()
     {

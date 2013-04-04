@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<FIXML xmlns="http://www.fixprotocol.org/FIXML-4-4">
+    <TrdCaptRpt RptID="876869" TransTyp="0" RptTyp="0" ReqID="9865444" TrdTyp="0" TrdSubTyp="6" TrdTyp2="0" TrnsfrRsn="THF" ExecTyp="0"
+			TotNumTrdRpts="1" LastRptReqed="false" Unsol="N" SubReqTyp="0" RptRefID="653" RptRefID2="987h" RptID2="87987" LinkID="987574"
+			TrdMtchID="53" ExecID="98643" OrdStat="0" ExecID2="sss666" ExecRstmtRsn="0" PrevlyRpted="N" PxTyp="1" QtyTyp="0"
+			UndSesID="543543" UndSesSub="098089" LastQty="1200" LastPx="65.9" LastParPx="56.8" LastSpotRt="1.95" LastFwdPnts="3" LastMkt="XABJ"
+			TrdDt="2006-01-01" BizDt="2006-01-01" AvgPx="44.9" AvgPxInd="0" MLEGRptTyp="1" TrdLegRefID="7657" TxnTm="2006-01-01T00:00:00"
+			SettlTyp="0" SettlDt="2006-01-01" MtchStat="0" MtchTyp="A5" CopyMsgInd="false" PubTrdInd="N" ShrtSaleRsn="0">
+        <Hdr SID="" TID="" Snt="2007-01-01T00:00:00Z" SeqNum="56">
+            <Hop ID="Hop1"/>
+        </Hdr>
+		<Instrmt Sym="ABC" Sfx="CD" ID="ABV" Src="1" Prod="1" CFI="XYZ" SecTyp="CD" SubTyp="01" MMY="200612" MatDt="2006-01-01"
+				CpnPmt="2006-01-01" Issued="2006-01-01" RepoCollSecTyp="BA" RepoTrm="2" RepoRt="1.2" Fctr="1.1" CrdRtg="AA" Rgstry="ZZ"
+				IssuCtry="GB" StPrv="NONE" Lcl="England" Redeem="2006-01-01" Strk="2.4" StrkCcy="GBP" OptAt="A" Mult="2" CpnRt="3.4" Exch="XABJ"
+				Issr="Me" EncIssrLen="4" EncIssr="FOUR" Desc="Descr" EncSecDescLen="4" EncSecDesc="FOUR" Pool="Pool" CSetMo="200612"
+				CPPgm="99" CPRegT="Reg type" Dated="2006-01-01" IntAcrl="2006-01-01">
+			<AID AltID="Altid" AltIDSrc="1"/>
+			<Evnt EventTyp="1" Dt="2006-01-01" Px="12.4" Txt="Text"/>
+		</Instrmt>
+		<FinDetls AgmtDesc="Agreement desc" AgmtID="Agmt1" AgmtDt="2006-01-01" AgmtCcy="GBP" TrmTyp="1" StartDt="2006-01-01"
+				EndDt="2006-01-01" DlvryTyp="0" MgnRatio="1.5"/>
+		<OrdQty Qty="500" RndDir="1" RndMod="3.4"/>
+		<Yield Typ="CALL" Yld="4.9" CalcDt="2006-01-01" RedDt="2006-01-01" RedPx="5.3" RedPxTyp="2"/>
+		<Undly Sym="AFT" Sfx="CD" ID="ID1" Src="1" Prod="1" CFI="IJHG" Typ="POLK" SubTyp="THE" MMY="200612"
+				Mat="2006-01-01" CpnPmt="2006-01-01" Issued="2006-01-01" RepoCollSecTyp="CD" RepoTrm="2" RepoRt="2.9" Fctr="3" CrdRtg="AA"
+				Rgstry="ZZ" Ctry="GB" StOrProvnc="NONE" Lcl="Ireland" Redeem="2006-01-01" StrkPx="2.9" StrkCcy="GBP" OptA="R" Mult="2"
+				CpnRt="3.8" Exch="XABJ" Issr="Me" EncUndIssrLen="4" EncUndIssr="FOUR" Desc="Descr" EncUndSecDescLen="4"
+				EncUndSecDesc="FOUR" CPPgm="HGF" CPRegTyp="W" Ccy="GBP" Qty="3890" Px="12.9" DirtPx="5" EndPx="6" StartVal="4" CurVal="7.9"
+				EndVal="8.9">
+			<UndAID AltID="YHG" AltIDSrc="1"/>
+			<Stip Typ="TYH" Val="433"/>
+		</Undly>
+		<SprdBnchmkCurve Spread="2.3" Ccy="GBP" Name="OTHER" Point="2" Px="5.6" PxTyp="1" SecID="Secid" SecIDSrc="1"/>
+		<Amt Typ="CASH" Amt="3590.56"/>
+		<TrdLeg Qty="2500" SwapTyp="1" PosEfct="C" Cover="0" RefID="765434" Px="11.54" SettlTyp="AXD" LastPx="23.32">
+			<Leg Sym="ABC" Sfx="CD" ID="FGH" Src="1" Prod="1" CFI="IKL" SecTyp="CD" SecSubTyp="WER" MMY="200612" Mat="2006-01-01"
+					CpnPmt="2006-01-01" Issued="2006-01-01" RepoCollSecTyp="CD" RepoTrm="2" RepoRt="2.5" Fctr="3.9" CrdRtg="AA" Rgstry="ZZ"
+					Ctry="GB" StOrProvnc="NONE" Lcl="England" Redeem="2006-01-01" Strk="2.4" StrkCcy="GBP" OptA="E" Cmult="2" CpnRt="3.4" Exch="XABJ"
+					Issr="Me" EncLegIssrLen="4" EncLegIssr="FOUR" Desc="Descr" EncLegSecDescLen="4" EncLegSecDesc="FOUR" RatioQty="1.4" Side="1"
+					Ccy="GBP" Pool="W" Dated="1" CSetMo="200612" IntAcrl="2006-01-01">
+				<LegAID SecAltID="Altid" SecAltIDSrc="1"/>
+			</Leg>
+			<Stip StipTyp="CPR" StipVal="34.5"/>
+			<Pty ID="ID3" Src="2" R="3">
+				<Sub ID="TGF" Typ="2"/>
+			</Pty>
+		</TrdLeg>
+		<TrdRegTS TS="2006-01-01T00:00:00" Typ="1" Src="3"/>
+		<RptSide Side="1" OrdID="98794382" OrdID2="3443" ClOrdID="7646" ClOrdID2="998" ListID="123312" Acct="455466"
+				AcctIDSrc="99" AcctTyp="1" ProcCode="0" OddLot="N" ClrFeeInd="1" InptSrc="HNG" InptDev="HTFF" OrdInptDev="kjhhh" Ccy="GBP"
+				ComplianceID="98734" SolFlag="N" Cpcty="A" Rstctions="1" CustCpcty="3" OrdTyp="1" ExecInst="0"
+				TransBkdTm="2006-01-01T00:00:00" SesID="87676" SesSub="3445" TmBkt="42554" GrossTrdAmt="3400" NumDaysInt="30" ExDt="2006-01-01"
+				AcrdIntRt="2.5" AcrdIntAmt="23500" IntAtMat="1200"  EndAcrdIntAmt="256" StartCsh="12.87" EndCsh="23.8" Concession="3"
+				TotTakedown="98" NetMny="45" SettlCurrAmt="98000" SettlCcy="USD" SettlCurrFxRt="1.9" SettlCurrFxRtCalc="2" PosEfct="C" Txt="Text"
+				EncTxtLen="4" EncTxt="FOUR" MLegRptTyp="1" ExchRule="AS"
+				AllocInd="0" PreallocMeth="6" AllocID="654654">
+			<Pty ID="UHG" Src="2" R="5">
+				<Sub ID="ID5" Typ="2"/>
+			</Pty>
+			<ClrInst ClrngInstrctn="11"/>
+			<Comm Comm="45.75" CommTyp="1" Ccy="GBP" FundRenewWaiv="N"/>
+			<ContAmt ContAmtTyp="9" ContAmtValu="12.6" ContAmtCurr="GBP"/>
+			<Stip Typ="HEP" Val="3456"/>
+			<MiscFees Amt="786.32" Curr="GBP" Typ="4" Basis="2"/>
+			<Alloc Acct="876876" ActIDSrc="99" AllocSettlCcy="GBP" IndAllocID="987676" Qty="4500">
+				<Pty ID="ID67" Src="8" R="7">
+					<Sub ID="ID45" Typ="2"/>
+				</Pty>
+			</Alloc>
+		</RptSide>
+    </TrdCaptRpt>
+</FIXML>

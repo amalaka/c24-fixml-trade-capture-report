@@ -4,10 +4,11 @@ import biz.c24.io.api.data.Element;
 import biz.c24.io.api.presentation.JsonSink;
 import biz.c24.io.fixml.sample.storage.MongoDbWriter;
 import biz.c24.io.spring.core.C24Model;
-import biz.c24.io.spring.source.TextualSourceFactory;
+import biz.c24.io.spring.source.XmlSourceFactory;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.smoke.test.ConsolePrinter;
+import org.fixprotocol.fixml44.FIXMLElement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
@@ -20,7 +21,10 @@ import java.net.UnknownHostException;
  * @author mvickery
  * @since 03/04/2013
  */
-@ImportResource(value = "classpath:META-INF/spring/flow-config.xml")
+@ImportResource(value = {
+        "classpath:META-INF/spring/gem-exception-management.xml",
+        "classpath:META-INF/spring/flow-config.xml"
+})
 @Configuration
 public class C24iOConfiguration {
 
@@ -40,16 +44,16 @@ public class C24iOConfiguration {
         return mongoDbWriter;
     }
 
-    @Bean(name = "textualSourceFactory")
-    public TextualSourceFactory getTextualSourceFactory() {
-        TextualSourceFactory textualSourceFactory = new TextualSourceFactory();
-        textualSourceFactory.setEncoding("UTF-8");
-        return textualSourceFactory;
+    @Bean(name = "xmlSourceFactory")
+    public XmlSourceFactory getTextualSourceFactory() {
+        XmlSourceFactory xmlSourceFactory = new XmlSourceFactory();
+        xmlSourceFactory.setEncoding("UTF-8");
+        return xmlSourceFactory;
     }
 
     @Bean(name = "fixmlModel")
     public C24Model getFixmlModel() {
-        Element element = new biz.c24.io.fixml50.FIXML5_0DocumentRootElement();
+        Element element = new FIXMLElement();
         return new C24Model(element);
     }
 

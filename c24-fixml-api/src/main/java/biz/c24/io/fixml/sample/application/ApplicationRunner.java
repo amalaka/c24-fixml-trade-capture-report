@@ -20,6 +20,7 @@ public class ApplicationRunner {
     public static void main(String[] args) {
 
         System.out.println("Starting application...(loading Spring Integration contexts)");
+        System.setProperty("IO_HOME", "/Applications/C24");
         new ApplicationRunner().loadSpringContainer();
         System.out.println("...loaded.");
     }

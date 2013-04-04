@@ -45,22 +45,21 @@
         <dependency>
             <groupId>c24-fixml-model</groupId>
             <artifactId>model</artifactId>
-            <!--<artifactId>c24-fixml-models</artifactId>-->
             <version>${c24-fixml-model.version}</version>
         </dependency>
         <dependency>
             <groupId>biz.c24.io.fixml</groupId>
-            <artifactId>FixML-5</artifactId>
-            <version>5SP2</version>
+            <artifactId>FixML-44</artifactId>
+            <version>44</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/biz.c24.io.fixml50.jar</systemPath>
+            <systemPath>${project.basedir}/lib/biz.c24.io.fixml44.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>biz.c24.io.fixml-proto</groupId>
-            <artifactId>FixML-5-proto</artifactId>
-            <version>5SP2</version>
+            <artifactId>FixML-44-proto</artifactId>
+            <version>44</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.fixprotocol.fixml50.jar</systemPath>
+            <systemPath>${project.basedir}/lib/org.fixprotocol.fixml44.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>biz.c24.io.spring</groupId>
