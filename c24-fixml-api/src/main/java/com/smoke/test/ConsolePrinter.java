@@ -12,7 +12,7 @@ public class ConsolePrinter
 
     public Message<?> service(Message<?> message)
     {
-        System.out.println("Pulled: " + message.getPayload().toString());
+        //System.out.println("Pulled: " + message.getPayload().toString());
         return message;
     }
 }

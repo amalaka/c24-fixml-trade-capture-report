@@ -5,6 +5,7 @@ import biz.c24.io.api.presentation.JsonSink;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.util.JSON;
+import com.mongodb.util.JSONParseException;
 import org.springframework.integration.annotation.ServiceActivator;
 
 import java.io.IOException;
@@ -29,6 +30,8 @@ public class MongoDbWriter {
             sink.writeObject(complexDataObject);
             BasicDBObject obj = (BasicDBObject) JSON.parse(writer.toString());
             mongoDBCollection.save(obj);
+        } catch (JSONParseException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
