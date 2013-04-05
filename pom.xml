@@ -35,7 +35,7 @@
     </modules>
 
     <properties>
-        <c24.api.version>4.2.0</c24.api.version>
+        <c24.api.version>4.2.2-SNAPSHOT</c24.api.version>
         <junit.version>4.11</junit.version>
     </properties>
 
@@ -52,12 +52,34 @@
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>
-            <dependency>
-                <groupId>c24-fixml-sample</groupId>
-                <artifactId>c24-fixml-models</artifactId>
-                <version>1.0</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>com.springsource.repository.bundles.release</id>
+            <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+        <repository>
+            <id>spring-milestone</id>
+            <name>Spring Portfolio Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>c24-nexus</id>
+            <name>C24 Nexus</name>
+            <url>http://repo.c24io.net:8081/nexus/content/groups/public</url>
+        </repository>
+        <repository>
+            <id>gemstone</id>
+            <url>http://dist.gemstone.com.s3.amazonaws.com/maven/release/</url>
+        </repository>
+    </repositories>
 
 </project>
