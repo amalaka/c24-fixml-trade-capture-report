@@ -15,7 +15,7 @@
     <version>1.0</version>
 
     <properties>
-        <c24.api.version>4.2.1</c24.api.version>
+        <c24.api.version>4.2.1-SNAPSHOT</c24.api.version>
         <c24.xsd.directory>xsd</c24.xsd.directory>
         <c24.imported.schema.directory>model</c24.imported.schema.directory>
         <c24.deployment.directory>target/generated/deployment</c24.deployment.directory>
