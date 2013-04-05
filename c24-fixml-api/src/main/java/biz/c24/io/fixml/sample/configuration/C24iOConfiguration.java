@@ -29,7 +29,7 @@ import java.net.UnknownHostException;
 public class C24iOConfiguration {
 
     private final String mongoServer = "localhost";
-    private final int mongoPort = 1723;
+    private final int mongoPort = 27017;
     private final String mongoDBName = "fixmlDB";
     private final String mongoCollectionName = "messages";
 
