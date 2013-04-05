@@ -14,17 +14,39 @@
     <version>1.0</version>
     <name>c24-fixml-api</name>
 
+    <developers>
+        <developer>
+            <name>Matt Vickery</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>matt.vickery(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Enrico Musuruana</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>enrico.musuruana(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <properties>
         <c24.spring.version>2.2.1</c24.spring.version>
         <org.springframework.version>3.2.2.RELEASE</org.springframework.version>
         <org.spring.integration.version>2.2.3.RELEASE</org.spring.integration.version>
+        <junit.version>4.11</junit.version>
         <c24-fixml-model.version>1.0</c24-fixml-model.version>
         <gemfire.version>6.6.3</gemfire.version>
         <log4j.version>1.2.17</log4j.version>
         <slf4j.version>1.6.4</slf4j.version>
         <cglib.version>2.2.2</cglib.version>
         <aspectj.version>1.6.11</aspectj.version>
-        <mongodb.java.driver>2.10.1</mongodb.java.driver>
+        <c24.api.version>4.2.2-SNAPSHOT</c24.api.version>
     </properties>
 
     <dependencies>
@@ -32,7 +54,6 @@
             <groupId>c24-fixml-sample</groupId>
             <artifactId>c24-fixml-models</artifactId>
             <version>${c24-fixml-model.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>biz.c24.io</groupId>
