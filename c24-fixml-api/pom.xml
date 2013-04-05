@@ -44,6 +44,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>c24-fixml-model</groupId>
+            <artifactId>model</artifactId>
+            <version>${c24-fixml-model.version}</version>
+        </dependency>
+        <dependency>
             <groupId>biz.c24.io</groupId>
             <artifactId>c24-io-api</artifactId>
             <version>${c24.api.version}</version>
@@ -67,7 +72,7 @@
             <artifactId>c24-spring-core</artifactId>
             <version>${c24.spring.version}</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>biz.c24.io</groupId>
                     <artifactId>c24-io-api</artifactId>
                 </exclusion>
@@ -78,7 +83,7 @@
             <artifactId>c24-spring-integration</artifactId>
             <version>${c24.spring.version}</version>
             <exclusions>
-                <exclusion>  <!-- declare the exclusion here -->
+                <exclusion>
                     <groupId>biz.c24.io</groupId>
                     <artifactId>c24-io-api</artifactId>
                 </exclusion>
