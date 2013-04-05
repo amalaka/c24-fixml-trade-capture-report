@@ -39,7 +39,7 @@
         <slf4j.version>1.6.4</slf4j.version>
         <cglib.version>2.2.2</cglib.version>
         <aspectj.version>1.6.11</aspectj.version>
-        <c24.api.version>4.2.1-SNAPSHOT</c24.api.version>
+        <c24.api.version>4.2.2-SNAPSHOT</c24.api.version>
     </properties>
 
     <dependencies>
