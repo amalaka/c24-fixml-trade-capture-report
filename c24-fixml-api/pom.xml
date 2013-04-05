@@ -39,13 +39,14 @@
         <slf4j.version>1.6.4</slf4j.version>
         <cglib.version>2.2.2</cglib.version>
         <aspectj.version>1.6.11</aspectj.version>
+        <c24.api.version>4.2.1-SNAPSHOT</c24.api.version>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>c24-fixml-model</groupId>
-            <artifactId>model</artifactId>
-            <version>${c24-fixml-model.version}</version>
+            <groupId>biz.c24.io</groupId>
+            <artifactId>c24-io-api</artifactId>
+            <version>${c24.api.version}</version>
         </dependency>
         <dependency>
             <groupId>biz.c24.io.fixml</groupId>
@@ -65,11 +66,23 @@
             <groupId>biz.c24.io.spring</groupId>
             <artifactId>c24-spring-core</artifactId>
             <version>${c24.spring.version}</version>
+            <exclusions>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>biz.c24.io</groupId>
+                    <artifactId>c24-io-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>biz.c24.io.spring</groupId>
             <artifactId>c24-spring-integration</artifactId>
             <version>${c24.spring.version}</version>
+            <exclusions>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>biz.c24.io</groupId>
+                    <artifactId>c24-io-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -142,6 +155,16 @@
             <artifactId>aspectjweaver</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
+        <dependency>
+            <groupId>c24-fixml</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>c24-fixml</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -180,6 +203,13 @@
             <name>C24 Nexus</name>
             <url>http://repo.c24io.net:8081/nexus/content/groups/public</url>
         </repository>
+
+
+           <repository>
+             <id>gemstone</id>
+             <url>http://dist.gemstone.com.s3.amazonaws.com/maven/release/</url>
+           </repository>
+
     </repositories>
 
 </project>
