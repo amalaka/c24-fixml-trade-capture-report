@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    
+
     <modelVersion>4.0.0</modelVersion>
     <groupId>c24-fixml-sample</groupId>
     <artifactId>c24-fixml-sample</artifactId>
@@ -8,9 +8,56 @@
     <packaging>pom</packaging>
     <name>c24-fixml-sample</name>
 
+    <developers>
+        <developer>
+            <name>Matt Vickery</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>matt.vickery(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+        <developer>
+            <name>Enrico Musuruana</name>
+            <organization>C24 Technologies Ltd</organization>
+            <email>enrico.musuruana(at)c24.biz</email>
+            <organizationUrl>http://www.c24.biz</organizationUrl>
+            <roles>
+                <role>Software Engineer</role>
+            </roles>
+        </developer>
+    </developers>
+
     <modules>
         <module>c24-fixml-models</module>
         <module>c24-fixml-api</module>
     </modules>
-    
+
+    <properties>
+        <c24.api.version>4.2.0</c24.api.version>
+        <junit.version>4.11</junit.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>biz.c24.io</groupId>
+                <artifactId>c24-io-api</artifactId>
+                <version>${c24.api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>c24-fixml-sample</groupId>
+                <artifactId>c24-fixml-models</artifactId>
+                <version>1.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 </project>
