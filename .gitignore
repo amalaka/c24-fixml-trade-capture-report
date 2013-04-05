@@ -10,3 +10,9 @@ c24-fixml-api/target
 c24-fixml-models/target
 
 
+
+c24-fixml-api/lib/*
+
+c24-fixml-models/model/*
+
+test-fixml-sample.log
