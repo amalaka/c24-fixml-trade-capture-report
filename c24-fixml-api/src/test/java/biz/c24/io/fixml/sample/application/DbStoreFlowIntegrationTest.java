@@ -4,6 +4,7 @@ import biz.c24.io.api.data.ComplexDataObject;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
 import biz.c24.io.fixml.sample.storage.MongoDbWriter;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -61,7 +62,7 @@ public class DbStoreFlowIntegrationTest {
         });
         sourcePollingChannelAdapter.start();
         Message<?> message = compassStoreChannel.receive(5000);
-        verify(mongoDbWriter, times(1));
+        verify(mongoDbWriter, times(1)).store((ComplexDataObject) anyObject());
 
         assertThat(message, notNullValue());
         assertThat(message.getPayload(), notNullValue());
@@ -73,13 +74,12 @@ public class DbStoreFlowIntegrationTest {
         when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenThrow(IllegalArgumentException.class);
         sourcePollingChannelAdapter.start();
         Message<?> message = compassStoreChannel.receive(50);
-        verify(mongoDbWriter, times(1));
+        verify(mongoDbWriter, never()).store((ComplexDataObject) anyObject());
 
         assertThat(message, nullValue());
-        assertThat(message.getPayload(), nullValue());
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test
     public void typeHandlingStoreChannel() {
 
         when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
@@ -90,5 +90,6 @@ public class DbStoreFlowIntegrationTest {
         });
         sourcePollingChannelAdapter.start();
         compassStoreChannel.receive(1000);
+        verify(mongoDbWriter, never()).store((ComplexDataObject) anyObject());
     }
 }
