@@ -1,5 +1,6 @@
 package biz.c24.io.fixml.sample.application;
 
+import biz.c24.io.fixml.sample.configuration.C24GemfireConfiguration;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class ApplicationRunner {
     private void loadSpringContainer() {
         try {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+            applicationContext.register(C24GemfireConfiguration.class);
             applicationContext.register(C24iOConfiguration.class);
             applicationContext.refresh();
 
