@@ -14,7 +14,6 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 
 import java.net.UnknownHostException;
@@ -29,7 +28,6 @@ import java.net.UnknownHostException;
         "classpath:META-INF/spring/gem-exception-management.xml",
         "classpath:META-INF/spring/flow-config.xml"
 })
-@PropertySource(value = "classpath:META-INF/spring/application.properties")
 @Configuration
 public class C24iOConfiguration {
 
