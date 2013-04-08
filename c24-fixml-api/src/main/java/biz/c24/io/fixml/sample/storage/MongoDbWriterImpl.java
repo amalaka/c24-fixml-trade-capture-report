@@ -12,7 +12,7 @@ import org.springframework.integration.annotation.ServiceActivator;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class MongoDbWriterImpl implements MongoDbWriter {
+public class MongoDbWriterImpl<T extends ComplexDataObject> implements MongoDbWriter<T> {
 
     private final JsonSink sink;
     private final DBCollection mongoDBCollection;
@@ -23,7 +23,7 @@ public class MongoDbWriterImpl implements MongoDbWriter {
     }
 
     @ServiceActivator
-    public ComplexDataObject store(final ComplexDataObject complexDataObject) {
+    public T store(final T complexDataObject) {
         System.out.println("Storing...");
         try {
             StringWriter writer = new StringWriter();
