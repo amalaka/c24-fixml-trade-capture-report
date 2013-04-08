@@ -23,14 +23,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
         IntegrationTestConfiguration.class
 })
 @RunWith(SpringJUnit4ClassRunner.class)
-public class FlowTest {
+public class FlowIntegrationTest {
 
     @Resource(name = "compass-store-channel-queue")
     private QueueChannel compassStoreChannel;
     @Resource(name = "file-reading-adapter")
     private SourcePollingChannelAdapter sourcePollingChannelAdapter;
 
-    public FlowTest() {
+    public FlowIntegrationTest() {
         System.setProperty("IO_HOME", "/Applications/C24");
     }
 

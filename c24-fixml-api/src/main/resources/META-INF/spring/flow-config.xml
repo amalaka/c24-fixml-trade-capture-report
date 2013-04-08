@@ -28,9 +28,7 @@
         <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
     </integration:chain>
 
-    <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
-    <integration:service-activator input-channel="c24-store-channel" output-channel="c24-transformer-channel"
-            ref="mongoDbFixMlCollectionWriter" method="store"/>
+    <!-- Store channel defined in: c24-db-store.xml -->
 
     <integration:channel id="c24-transformer-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="compass-store-channel">
@@ -39,5 +37,7 @@
         <!-- Call c24 validation -->
         <!-- Optional: route failures into exception management channel -->
     </integration:chain>
+    
+    <!-- Compass store channel defined in: gem-compass.xml -->
     
 </beans>
