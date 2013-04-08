@@ -4,6 +4,7 @@ import biz.c24.io.api.data.ComplexDataObject;
 import biz.c24.io.api.presentation.JsonSink;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
+import com.mongodb.MongoException;
 import com.mongodb.util.JSON;
 import com.mongodb.util.JSONParseException;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -13,8 +14,8 @@ import java.io.StringWriter;
 
 public class MongoDbWriter {
 
-    private JsonSink sink;
-    private DBCollection mongoDBCollection;
+    private final JsonSink sink;
+    private final DBCollection mongoDBCollection;
 
     public MongoDbWriter(final DBCollection mongoDBCollection, final JsonSink sink) {
         this.mongoDBCollection = mongoDBCollection;
@@ -32,10 +33,12 @@ public class MongoDbWriter {
             mongoDBCollection.save(obj);
         } catch (JSONParseException e) {
             e.printStackTrace();
-            throw new RuntimeException(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage(), e);
+        } catch (MongoException.Network e) {
+            throw new IllegalStateException("mongoDB not accessible - ensure that it's running and available for service.");
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException(e.getMessage(), e);
+            throw new IllegalStateException(e.getMessage(), e);
         }
     }
 }

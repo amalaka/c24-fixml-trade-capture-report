@@ -32,7 +32,7 @@ public class ApplicationRunner {
             applicationContext.refresh();
 
             if (applicationContext.containsBean("file-reading-adapter")) {
-                LOGGER.info("Triggering start of file consumption.");
+                LOGGER.info("Triggering start of file consumption..");
                 Object bean = applicationContext.getBean("file-reading-adapter");
                 if (bean instanceof SourcePollingChannelAdapter)
                     ((SourcePollingChannelAdapter) bean).start();

@@ -9,9 +9,13 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoClient;
 import com.smoke.test.ConsolePrinter;
 import org.fixprotocol.fixml44.FIXMLElement;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 
 import java.net.UnknownHostException;
 
@@ -25,17 +29,30 @@ import java.net.UnknownHostException;
         "classpath:META-INF/spring/gem-exception-management.xml",
         "classpath:META-INF/spring/flow-config.xml"
 })
+@PropertySource(value = "classpath:META-INF/spring/application.properties")
 @Configuration
 public class C24iOConfiguration {
 
-    private final String mongoServer = "localhost";
-    private final int mongoPort = 27017;
-    private final String mongoDBName = "fixmlDB";
-    private final String mongoCollectionName = "messages";
+    @Value("${mongo.db.server}")
+    private String mongoServer;
+    @Value("${mongo.db.port}")
+    private int mongoPort;
+    @Value("${mongo.db.name}")
+    private String mongoDBName;
+    @Value("${mongo.collection.messages.name}")
+    private String mongoCollectionName;
 
     @Bean(name = "debug")
     public ConsolePrinter getConsolePrinter() {
         return new ConsolePrinter();
+    }
+
+    @Bean
+    public static PropertyPlaceholderConfigurer getProperties() {
+        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+        ppc.setLocation(new ClassPathResource("META-INF/spring/application.properties"));
+        ppc.setIgnoreUnresolvablePlaceholders(true);
+        return ppc;
     }
 
     @Bean(name = "mongoDbFixMlCollectionWriter")
@@ -70,6 +87,6 @@ public class C24iOConfiguration {
     @Bean(name = "fixmlCollection")
     public DBCollection getFIXMLCollection() throws UnknownHostException {
         MongoClient mongoClient = getMongoClient();
-        return  mongoClient.getDB(mongoDBName).getCollection(mongoCollectionName);
+        return mongoClient.getDB(mongoDBName).getCollection(mongoCollectionName);
     }
 }

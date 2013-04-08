@@ -15,33 +15,25 @@
 
     <integration:message-history/>
 
-    <file:inbound-channel-adapter
-            id="file-reading-adapter"
-            directory="classpath:data-fixtures"
-            channel="c24-parser-channel"
-            auto-startup="true">
+    <file:inbound-channel-adapter id="file-reading-adapter" directory="classpath:data-fixtures" 
+                                  channel="c24-parser-channel" auto-startup="true">
         <integration:poller id="poller" fixed-delay="3000"/>
     </file:inbound-channel-adapter>
 
     <integration:channel id="c24-parser-channel" datatype="java.io.File"/>
     <integration:chain id="parse-chain" input-channel="c24-parser-channel" output-channel="c24-store-channel">
         <file:file-to-string-transformer/>
-        <c24:unmarshalling-transformer id="c24io-fixml-parser"
-                                       source-factory-ref="xmlSourceFactory"
-                                       model-ref="fixmlModel"/>
+        <c24:unmarshalling-transformer id="c24io-fixml-parser" source-factory-ref="xmlSourceFactory" model-ref="fixmlModel"/>
         <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
         <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
     </integration:chain>
 
     <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
-    <integration:service-activator
-            input-channel="c24-store-channel"
-            output-channel="c24-transformer-channel"
+    <integration:service-activator input-channel="c24-store-channel" output-channel="c24-transformer-channel"
             ref="mongoDbFixMlCollectionWriter" method="store"/>
 
-    <integration:channel id="c24-transformer-channel" datatype="java.lang.String"/>
-    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel"
-                       output-channel="c24-cache-channel">
+    <integration:channel id="c24-transformer-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
+    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="c24-cache-channel">
         <integration:service-activator ref="debug"/>
         <!-- Insert C24 iO transform -->
         <!-- Call c24 validation -->
