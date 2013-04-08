@@ -25,7 +25,9 @@ import java.net.UnknownHostException;
  * @since 03/04/2013
  */
 @ImportResource(value = {
+        "classpath:META-INF/spring/gem.xml",
         "classpath:META-INF/spring/gem-exception-management.xml",
+        "classpath:META-INF/spring/gem-compass.xml",
         "classpath:META-INF/spring/flow-config.xml"
 })
 @Configuration

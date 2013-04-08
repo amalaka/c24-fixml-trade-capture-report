@@ -6,8 +6,8 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/integration/gemfire 
         http://www.springframework.org/schema/integration/gemfire/spring-integration-gemfire.xsd">
-
-    <int-gfe:outbound-channel-adapter id="exception-channel" region="exception-management">
+   
+    <int-gfe:outbound-channel-adapter id="compass-store-channel" region="compass">
         <int-gfe:cache-entries>
             <entry key="message.getId" value="payload"/>
         </int-gfe:cache-entries>

@@ -16,7 +16,7 @@
     <integration:message-history/>
 
     <file:inbound-channel-adapter id="file-reading-adapter" directory="classpath:data-fixtures" 
-                                  channel="c24-parser-channel" auto-startup="true">
+                                  channel="c24-parser-channel" auto-startup="false">
         <integration:poller id="poller" fixed-delay="3000"/>
     </file:inbound-channel-adapter>
 
@@ -33,16 +33,11 @@
             ref="mongoDbFixMlCollectionWriter" method="store"/>
 
     <integration:channel id="c24-transformer-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
-    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="c24-cache-channel">
+    <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="compass-store-channel">
         <integration:service-activator ref="debug"/>
         <!-- Insert C24 iO transform -->
         <!-- Call c24 validation -->
         <!-- Optional: route failures into exception management channel -->
     </integration:chain>
-
-    <integration:channel id="c24-cache-channel"/>
-    <integration:service-activator
-            input-channel="c24-cache-channel"
-            ref="debug"/>
-
+    
 </beans>
