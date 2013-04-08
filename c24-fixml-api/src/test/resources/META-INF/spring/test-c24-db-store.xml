@@ -8,8 +8,8 @@
     http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
-    <bean id="mongoDbFixMlCollectionWriter" class="org.mockito.Mockito" factory-method="spy">
-        <constructor-arg ref="mongoDbFixMlCollectionWriter"/>
+    <bean id="mongoDbFixMlCollectionWriter" class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="biz.c24.io.fixml.sample.storage.MongoDbWriter"/>
     </bean>
     <integration:service-activator input-channel="c24-store-channel" output-channel="c24-transformer-channel"
             ref="mongoDbFixMlCollectionWriter" method="store"/>

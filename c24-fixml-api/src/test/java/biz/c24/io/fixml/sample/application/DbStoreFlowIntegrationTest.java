@@ -21,9 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.mockito.Matchers.anyObject;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Enrico Musuruana
@@ -54,14 +52,13 @@ public class DbStoreFlowIntegrationTest {
 
     @Test
     public void testInputHandler() {
-
-        when(mongoDbWriter.store((ComplexDataObject) anyObject())).then(new Answer<Object>() {
+        
+        when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
                 return invocationOnMock.getArguments()[0];
             }
         });
-
         sourcePollingChannelAdapter.start();
         Message<?> message = compassStoreChannel.receive(5000);
         verify(mongoDbWriter, times(1));
@@ -72,9 +69,8 @@ public class DbStoreFlowIntegrationTest {
 
     @Test
     public void testExceptionHandling() {
-
+        
         when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenThrow(IllegalArgumentException.class);
-
         sourcePollingChannelAdapter.start();
         Message<?> message = compassStoreChannel.receive(50);
         verify(mongoDbWriter, times(1));
@@ -93,5 +89,6 @@ public class DbStoreFlowIntegrationTest {
             }
         });
         sourcePollingChannelAdapter.start();
+        compassStoreChannel.receive(1000);
     }
 }

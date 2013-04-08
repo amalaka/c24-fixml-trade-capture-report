@@ -3,6 +3,7 @@ package biz.c24.io.fixml.sample.configuration;
 import biz.c24.io.api.data.Element;
 import biz.c24.io.api.presentation.JsonSink;
 import biz.c24.io.fixml.sample.storage.MongoDbWriter;
+import biz.c24.io.fixml.sample.storage.MongoDbWriterImpl;
 import biz.c24.io.spring.core.C24Model;
 import biz.c24.io.spring.source.XmlSourceFactory;
 import com.mongodb.DBCollection;
@@ -54,7 +55,7 @@ public class C24iOConfiguration {
 
     @Bean(name = "mongoDbFixMlCollectionWriter")
     public MongoDbWriter getMongoDbWriter() throws UnknownHostException {
-        MongoDbWriter mongoDbWriter = new MongoDbWriter(getFIXMLCollection(), getJsonSink());
+        MongoDbWriter mongoDbWriter = new MongoDbWriterImpl(getFIXMLCollection(), getJsonSink());
         return mongoDbWriter;
     }
 

@@ -28,7 +28,7 @@
         <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
     </integration:chain>
 
-    <!-- Store channel defined in: c24-db-store.xml -->
+    <!-- Store channel defined in: test-c24-db-store.xml -->
 
     <integration:channel id="c24-transformer-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="compass-store-channel">

@@ -9,7 +9,10 @@ import org.springframework.context.annotation.ImportResource;
  * @author mvickery
  * @since 08/04/2013
  */
-@ImportResource(value = "classpath:META-INF/spring/cache-channel-queue.xml")
+@ImportResource(value = {
+        "classpath:META-INF/spring/test-cache-channel-queue.xml",
+        "classpath:META-INF/spring/test-c24-db-store.xml"
+})
 @Configuration
 public class IntegrationTestConfiguration {
 }
