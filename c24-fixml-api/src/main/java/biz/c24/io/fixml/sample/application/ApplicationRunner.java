@@ -1,5 +1,6 @@
 package biz.c24.io.fixml.sample.application;
 
+import biz.c24.io.fixml.sample.configuration.C24DbConfiguration;
 import biz.c24.io.fixml.sample.configuration.C24GemfireConfiguration;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
 import org.slf4j.Logger;
@@ -31,6 +32,7 @@ public class ApplicationRunner {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
             applicationContext.register(C24GemfireConfiguration.class);
             applicationContext.register(C24iOConfiguration.class);
+            applicationContext.register(C24DbConfiguration.class);
             applicationContext.refresh();
 
             if (applicationContext.containsBean("file-reading-adapter")) {

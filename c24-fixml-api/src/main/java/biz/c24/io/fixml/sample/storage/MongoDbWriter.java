@@ -23,7 +23,7 @@ public class MongoDbWriter {
     }
 
     @ServiceActivator
-    public void store(final ComplexDataObject complexDataObject) {
+    public ComplexDataObject store(final ComplexDataObject complexDataObject) {
         System.out.println("Storing...");
         try {
             StringWriter writer = new StringWriter();
@@ -31,6 +31,7 @@ public class MongoDbWriter {
             sink.writeObject(complexDataObject);
             BasicDBObject obj = (BasicDBObject) JSON.parse(writer.toString());
             mongoDBCollection.save(obj);
+            return complexDataObject;
         } catch (JSONParseException e) {
             e.printStackTrace();
             throw new IllegalStateException(e.getMessage(), e);
