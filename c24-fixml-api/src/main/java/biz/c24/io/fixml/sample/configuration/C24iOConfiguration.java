@@ -11,11 +11,9 @@ import com.mongodb.MongoClient;
 import com.smoke.test.ConsolePrinter;
 import org.fixprotocol.fixml44.FIXMLElement;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.core.io.ClassPathResource;
 
 import java.net.UnknownHostException;
 
@@ -43,14 +41,6 @@ public class C24iOConfiguration {
     @Bean(name = "debug")
     public ConsolePrinter getConsolePrinter() {
         return new ConsolePrinter();
-    }
-
-    @Bean
-    public static PropertyPlaceholderConfigurer getProperties() {
-        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-        ppc.setLocation(new ClassPathResource("META-INF/spring/application.properties"));
-        ppc.setIgnoreUnresolvablePlaceholders(true);
-        return ppc;
     }
 
     @Bean(name = "mongoDbFixMlCollectionWriter")

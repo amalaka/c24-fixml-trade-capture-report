@@ -3,6 +3,7 @@ package biz.c24.io.fixml.sample.application;
 import biz.c24.io.fixml.sample.configuration.C24DbConfiguration;
 import biz.c24.io.fixml.sample.configuration.C24GemfireConfiguration;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
+import biz.c24.io.fixml.sample.configuration.ExternalPropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -30,6 +31,7 @@ public class ApplicationRunner {
     private void loadSpringContainer() {
         try {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+            applicationContext.register(ExternalPropertiesConfiguration.class);
             applicationContext.register(C24GemfireConfiguration.class);
             applicationContext.register(C24iOConfiguration.class);
             applicationContext.register(C24DbConfiguration.class);

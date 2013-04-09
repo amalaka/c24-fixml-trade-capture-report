@@ -8,21 +8,11 @@
     http://www.springframework.org/schema/integration/spring-integration.xsd">
 
     <int:channel id="compass-store-channel">
-        <int:interceptors>
-            <int:wire-tap channel="compass-store-channel-queue"/>
-        </int:interceptors>
+        <int:queue capacity="50"/>
     </int:channel>
-    <int:channel id="compass-store-channel-queue">
-        <int:queue/>
-    </int:channel>
-
+    
     <int:channel id="exception-channel">
-        <int:interceptors>
-            <int:wire-tap channel="exception-store-channel-queue"/>
-        </int:interceptors>
+        <int:queue capacity="50"/>
     </int:channel>
-    <int:channel id="exception-store-channel-queue">
-        <int:queue/>
-    </int:channel>
-
+    
 </beans>

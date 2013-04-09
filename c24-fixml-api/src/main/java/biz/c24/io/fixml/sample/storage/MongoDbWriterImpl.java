@@ -29,16 +29,13 @@ public class MongoDbWriterImpl<T extends ComplexDataObject> implements MongoDbWr
             StringWriter writer = new StringWriter();
             sink.setWriter(writer);
             sink.writeObject(complexDataObject);
-            BasicDBObject obj = (BasicDBObject) JSON.parse(writer.toString());
-            mongoDBCollection.save(obj);
+            mongoDBCollection.save((BasicDBObject) JSON.parse(writer.toString()));
             return complexDataObject;
         } catch (JSONParseException e) {
-            e.printStackTrace();
             throw new IllegalStateException(e.getMessage(), e);
         } catch (MongoException.Network e) {
             throw new IllegalStateException("mongoDB not accessible - ensure that it's running and available for service.");
         } catch (IOException e) {
-            e.printStackTrace();
             throw new IllegalStateException(e.getMessage(), e);
         }
     }

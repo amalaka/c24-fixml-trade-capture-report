@@ -15,7 +15,7 @@
 
     <integration:message-history/>
 
-    <file:inbound-channel-adapter id="file-reading-adapter" directory="classpath:data-fixtures" 
+    <file:inbound-channel-adapter id="file-reading-adapter" directory="${file.source.dir}" 
                                   channel="c24-parser-channel" auto-startup="false">
         <integration:poller id="poller" fixed-delay="3000"/>
     </file:inbound-channel-adapter>
