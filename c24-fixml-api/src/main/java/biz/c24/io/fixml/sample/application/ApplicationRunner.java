@@ -31,6 +31,7 @@ public class ApplicationRunner {
     private void loadSpringContainer() {
         try {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+            
             applicationContext.register(ExternalPropertiesConfiguration.class);
             applicationContext.register(C24GemfireConfiguration.class);
             applicationContext.register(C24iOConfiguration.class);

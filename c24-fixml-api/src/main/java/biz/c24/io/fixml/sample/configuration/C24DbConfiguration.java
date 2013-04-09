@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ImportResource;
  * @since 03/04/2013
  */
 @ImportResource(value = {
-        "classpath:META-INF/spring/test-c24-db-store.xml"
+        "classpath:META-INF/spring/c24-db-store.xml"
 })
 @Configuration
 public class C24DbConfiguration {

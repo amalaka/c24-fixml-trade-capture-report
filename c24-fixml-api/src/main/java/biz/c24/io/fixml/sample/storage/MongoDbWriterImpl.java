@@ -7,7 +7,6 @@ import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
 import com.mongodb.util.JSON;
 import com.mongodb.util.JSONParseException;
-import org.springframework.integration.annotation.ServiceActivator;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -22,7 +21,6 @@ public class MongoDbWriterImpl<T extends ComplexDataObject> implements MongoDbWr
         this.sink = sink;
     }
 
-    @ServiceActivator
     public T store(final T complexDataObject) {
         System.out.println("Storing...");
         try {

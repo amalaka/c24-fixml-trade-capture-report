@@ -9,7 +9,7 @@
 
     <int-gfe:outbound-channel-adapter id="exception-channel" region="exception-management">
         <int-gfe:cache-entries>
-            <entry key="message.getId" value="payload"/>
+            <entry key="'exception'" value="payload"/>
         </int-gfe:cache-entries>
     </int-gfe:outbound-channel-adapter>
 

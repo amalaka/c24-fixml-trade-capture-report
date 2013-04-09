@@ -2,15 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:int-gfe="http://www.springframework.org/schema/integration/gemfire"
+       xmlns:integration="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/integration/gemfire 
         http://www.springframework.org/schema/integration/gemfire/spring-integration-gemfire.xsd">
-   
+    
+
     <int-gfe:outbound-channel-adapter id="compass-store-channel" region="compass">
         <int-gfe:cache-entries>
-            <entry key="message.getId" value="payload"/>
+            <entry key="'compass'" value="payload"/>
         </int-gfe:cache-entries>
     </int-gfe:outbound-channel-adapter>
-
+    
 </beans>
