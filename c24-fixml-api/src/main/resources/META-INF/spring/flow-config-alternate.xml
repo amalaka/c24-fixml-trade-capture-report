@@ -39,6 +39,6 @@
         <!-- Optional: route failures into exception management channel -->
     </integration:chain>
     
-    <!-- Compass store channel defined in: gem-compass.xml -->
+    <!-- Compass store channel defined in: gem-store-compass.xml -->
     
 </beans>
