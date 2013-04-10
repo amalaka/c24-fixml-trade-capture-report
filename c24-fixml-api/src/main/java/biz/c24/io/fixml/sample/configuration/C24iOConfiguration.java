@@ -1,7 +1,7 @@
 package biz.c24.io.fixml.sample.configuration;
 
-import biz.c24.io.api.data.Element;
 import biz.c24.io.api.presentation.JsonSink;
+import biz.c24.io.api.presentation.JsonSource;
 import biz.c24.io.fixml.sample.storage.MongoDbWriter;
 import biz.c24.io.fixml.sample.storage.MongoDbWriterImpl;
 import biz.c24.io.spring.core.C24Model;
@@ -58,8 +58,12 @@ public class C24iOConfiguration {
 
     @Bean(name = "fixmlModel")
     public C24Model getFixmlModel() {
-        Element element = new FIXMLElement();
-        return new C24Model(element);
+        return new C24Model(getFIXMLElement());
+    }
+
+    @Bean
+    public FIXMLElement getFIXMLElement() {
+        return new FIXMLElement();
     }
 
     @Bean
@@ -70,6 +74,11 @@ public class C24iOConfiguration {
     @Bean
     public JsonSink getJsonSink() {
         return new JsonSink();
+    }
+
+    @Bean
+    public JsonSource getJsonSource() {
+        return new JsonSource();
     }
 
     @Bean(name = "fixmlCollection")
