@@ -28,12 +28,6 @@ public class FixmlToCompassToMongoDbRunner {
     private void loadSpringContainer() {
         try {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-            
-//            applicationContext.register(C24ExternalPropertiesConfiguration.class);
-//            applicationContext.register(C24iOConfiguration.class);
-//            applicationContext.register(C24MongoDbConfiguration.class);
-//            applicationContext.register(C24DbConfiguration.class);
-            
             applicationContext.register(C24MongoDbFlowConfiguration.class);
             applicationContext.refresh();
 
