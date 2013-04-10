@@ -2,7 +2,7 @@ package biz.c24.io.fixml.sample.application;
 
 import biz.c24.io.api.data.ComplexDataObject;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
-import biz.c24.io.fixml.sample.configuration.ExternalPropertiesConfiguration;
+import biz.c24.io.fixml.sample.configuration.C24ExternalPropertiesConfiguration;
 import biz.c24.io.fixml.sample.storage.MongoDbCollectionWrapper;
 import biz.c24.io.fixml.sample.util.FileUtils;
 import org.junit.Before;
@@ -35,7 +35,7 @@ import static org.mockito.Mockito.*;
  * @since 03/04/2013
  */
 @ContextConfiguration(classes = {
-        ExternalPropertiesConfiguration.class,
+        C24ExternalPropertiesConfiguration.class,
         IntegrationTestConfiguration.class,
         C24iOConfiguration.class
 })

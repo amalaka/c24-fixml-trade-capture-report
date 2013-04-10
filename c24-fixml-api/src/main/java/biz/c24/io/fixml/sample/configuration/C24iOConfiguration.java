@@ -8,7 +8,6 @@ import com.smoke.test.ConsolePrinter;
 import org.fixprotocol.fixml44.FIXMLElement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 
 /**
  * Created on behalf of C24 Technologies Ltd.
@@ -16,9 +15,9 @@ import org.springframework.context.annotation.ImportResource;
  * @author mvickery
  * @since 03/04/2013
  */
-@ImportResource(value = {
-        "classpath:META-INF/spring/flow-config.xml"
-})
+//@ImportResource(value = {
+//        "classpath:META-INF/spring/flow-config.xml"
+//})
 @Configuration
 public class C24iOConfiguration {
 

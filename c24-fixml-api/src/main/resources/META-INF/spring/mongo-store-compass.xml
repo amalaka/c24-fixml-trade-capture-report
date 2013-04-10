@@ -3,11 +3,16 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:int="http://www.springframework.org/schema/integration"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/integration
+        http://www.springframework.org/schema/integration/spring-integration.xsd">
     
     <int:channel id="compass-store-channel"/>
-    <int:service-activator ref="mongoDbCompassCollectionWrapper" 
-                           method="store" 
-                           input-channel="compass-store-channel"/>
-    
+    <int:chain input-channel="compass-store-channel">
+        <int:service-activator ref="mongoDbCompassCollectionWrapper" method="store"/>
+        <int:header-enricher>
+            <int:header name="replyChannel" value="nullChannel" overwrite="true"/>
+        </int:header-enricher>
+    </int:chain>
+   
 </beans>

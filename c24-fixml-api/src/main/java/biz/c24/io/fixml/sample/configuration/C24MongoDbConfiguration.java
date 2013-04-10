@@ -65,7 +65,7 @@ public class C24MongoDbConfiguration {
     }
 
     @Bean(name = "exceptionManagementCollection")
-    private DBCollection getExceptionManagementCollection() throws UnknownHostException {
+    public DBCollection getExceptionManagementCollection() throws UnknownHostException {
         MongoClient mongoClient = getMongoClient();
         return mongoClient.getDB(mongoDBName).getCollection(mongoExceptionManagementCollectionName);
     }

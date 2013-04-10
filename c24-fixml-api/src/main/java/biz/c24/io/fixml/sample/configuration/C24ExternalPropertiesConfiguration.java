@@ -12,7 +12,7 @@ import org.springframework.core.io.ClassPathResource;
  * @since 09/04/2013
  */
 @Configuration
-public class ExternalPropertiesConfiguration {
+public class C24ExternalPropertiesConfiguration {
 
     @Bean
     public static PropertyPlaceholderConfigurer getProperties() {
