@@ -3,7 +3,7 @@ package biz.c24.io.fixml.sample.application;
 import biz.c24.io.api.data.ComplexDataObject;
 import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
 import biz.c24.io.fixml.sample.configuration.ExternalPropertiesConfiguration;
-import biz.c24.io.fixml.sample.storage.MongoDbWriter;
+import biz.c24.io.fixml.sample.storage.MongoDbCollectionWrapper;
 import biz.c24.io.fixml.sample.util.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ public class DbStoreFlowIntegrationTest {
     @Resource(name = "file-reading-adapter")
     private SourcePollingChannelAdapter sourcePollingChannelAdapter;
     @Resource(name = "mongoDbFixMlCollectionWriter")
-    private MongoDbWriter mongoDbWriter;
+    private MongoDbCollectionWrapper mongoDbCollectionWrapper;
     @Value("${file.source.dir}")
     private String dataFixturesDirectory;
     private File testFile;
@@ -60,14 +60,14 @@ public class DbStoreFlowIntegrationTest {
 
     @Before
     public void reset() {
-        Mockito.reset(mongoDbWriter);
+        Mockito.reset(mongoDbCollectionWrapper);
         testFile = FileUtils.getRawFileList(dataFixturesDirectory, true)[0];
     }
 
     @Test
     public void normalFlow() {
 
-        when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
+        when(mongoDbCollectionWrapper.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
                 return invocationOnMock.getArguments()[0];
@@ -75,7 +75,7 @@ public class DbStoreFlowIntegrationTest {
         });
         sendMessage(parseChannel, testFile);
         Message<?> message = compassStoreChannel.receive(5000);
-        verify(mongoDbWriter, times(1)).store((ComplexDataObject) anyObject());
+        verify(mongoDbCollectionWrapper, times(1)).store((ComplexDataObject) anyObject());
 
         assertThat(message, notNullValue());
         assertThat(message.getPayload(), notNullValue());
@@ -84,7 +84,7 @@ public class DbStoreFlowIntegrationTest {
     @Test(expected = MessageHandlingException.class)
     public void exceptionFlow() {
 
-        when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenThrow(IllegalArgumentException.class);
+        when(mongoDbCollectionWrapper.store((ComplexDataObject) anyObject())).thenThrow(IllegalArgumentException.class);
         sendMessage(parseChannel, testFile);
         compassStoreChannel.receive(2000);
     }
@@ -92,7 +92,7 @@ public class DbStoreFlowIntegrationTest {
     @Test(expected = MessageHandlingException.class)
     public void badTypeFlow() {
 
-        when(mongoDbWriter.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
+        when(mongoDbCollectionWrapper.store((ComplexDataObject) anyObject())).thenAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
                 return "Bad type";

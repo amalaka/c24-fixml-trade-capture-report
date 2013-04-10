@@ -1,9 +1,6 @@
 package biz.c24.io.fixml.sample.application;
 
-import biz.c24.io.fixml.sample.configuration.C24DbConfiguration;
-import biz.c24.io.fixml.sample.configuration.C24GemfireConfiguration;
-import biz.c24.io.fixml.sample.configuration.C24iOConfiguration;
-import biz.c24.io.fixml.sample.configuration.ExternalPropertiesConfiguration;
+import biz.c24.io.fixml.sample.configuration.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,16 +12,16 @@ import org.springframework.integration.endpoint.SourcePollingChannelAdapter;
  * @author mvickery
  * @since 03/04/2013
  */
-public class ApplicationRunner {
+public class FixmlToCompassToMongoDbRunner {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationRunner.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FixmlToCompassToMongoDbRunner.class);
     private static final String BEAN_CONFIGURATION_ERROR = "Bean configuration error.";
 
     public static void main(String[] args) {
 
         System.out.println("Starting application...(loading Spring Integration contexts)");
         System.setProperty("IO_HOME", "/Applications/C24");
-        new ApplicationRunner().loadSpringContainer();
+        new FixmlToCompassToMongoDbRunner().loadSpringContainer();
         System.out.println("...loaded.");
     }
 
@@ -33,8 +30,9 @@ public class ApplicationRunner {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
             
             applicationContext.register(ExternalPropertiesConfiguration.class);
-            applicationContext.register(C24GemfireConfiguration.class);
+            //applicationContext.register(C24GemfireConfiguration.class);
             applicationContext.register(C24iOConfiguration.class);
+            applicationContext.register(C24MongoDbConfiguration.class);
             applicationContext.register(C24DbConfiguration.class);
             applicationContext.refresh();
 

@@ -8,6 +8,7 @@ import biz.c24.io.api.data.ComplexDataObject;
  * @author mvickery
  * @since 08/04/2013
  */
-public interface MongoDbWriter<T extends ComplexDataObject> {
+public interface MongoDbCollectionWrapper<T extends ComplexDataObject> {
     public T store(final T complexDataObject);
+    public T query(final String query);
 }

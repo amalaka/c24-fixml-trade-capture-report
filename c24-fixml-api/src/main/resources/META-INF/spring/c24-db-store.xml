@@ -9,6 +9,6 @@
 
     <integration:channel id="c24-store-channel" datatype="biz.c24.io.api.data.ComplexDataObject"/>
     <integration:service-activator input-channel="c24-store-channel" output-channel="c24-transformer-channel"
-            ref="mongoDbFixMlCollectionWriter" method="store"/>
+            ref="mongoDbFixMlCollectionWrapper" method="store"/>
     
 </beans>
