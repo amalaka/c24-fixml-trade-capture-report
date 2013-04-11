@@ -27,13 +27,13 @@
     <int-mongodb:inbound-channel-adapter id="mongo-inbound-adapter"
            collection-name="${mongo.collection.fixml.name}"
            channel="input-channel"
-           query="{}"
+           query="{ 'FIXML.TrdCaptRpt.TradeCaptureReportElements.Instrmt.@attributes.StrkCcy' : 'GBP' }"
            expect-single-result="true"
            auto-startup="true">
-    		<integration:poller fixed-rate="1000" max-messages-per-poll="1"/>
+    		<integration:poller fixed-rate="1000" max-messages-per-poll="10"/>
     </int-mongodb:inbound-channel-adapter>
 
-    <integration:channel id="input-channel" datatype="java.lang.Object"/>
+    <integration:channel id="input-channel" />
     <integration:chain id="db-parser-chain" input-channel="input-channel" output-channel="enricher-channel">
         <integration:service-activator ref="parse-json" method="parse"/>
         <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
