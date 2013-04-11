@@ -6,8 +6,7 @@ import biz.c24.io.fixml.sample.enricher.CdoEnricher;
 import biz.c24.io.fixml.sample.reader.MongoDbReader;
 import biz.c24.io.fixml.sample.storage.CompassFileStore;
 import biz.c24.io.spring.core.C24Model;
-import com.smoke.test.ConsolePrinter;
-import org.fixprotocol.fixml44.FIXMLElement;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,19 +24,14 @@ import java.io.File;
 @ImportResource(value = {
         "classpath:META-INF/spring/flow-db-read.xml"
 })
-@Import(C24ExternalPropertiesConfiguration.class)
+@Import({
+        C24ExternalPropertiesConfiguration.class,
+        C24MongoDbConfiguration.class,
+        C24iOConfiguration.class
+})
 
 @Configuration
 public class C24MongoDbPollerConfiguration {
-
-    @Value("${mongo.db.server}")
-    private String mongoServer;
-    @Value("${mongo.db.port}")
-    private int mongoPort;
-    @Value("${mongo.db.name}")
-    private String mongoDBName;
-    @Value("${mongo.collection.fixml.name}")
-    private String mongoCollectionName;
 
     @Value("${file.source.dir")
     private String fileSource;
@@ -46,32 +40,14 @@ public class C24MongoDbPollerConfiguration {
     @Value("${file.compass.valid.dir}")
     private String invalidDir;
 
-    @Bean(name = "debug")
-    public ConsolePrinter getConsolePrinter() {
-        return new ConsolePrinter();
-    }
+    @Autowired private JsonSource jsonSource;
+    @Autowired private C24Model fixmlModel;
 
-    @Bean(name = "fixmlModel")
-    public C24Model getFixmlModel() {
-        return new C24Model(getFIXMLElement());
-    }
-
-    @Bean
-    public FIXMLElement getFIXMLElement() {
-        return new FIXMLElement();
-    }
-
-    @Bean
-    public JsonSource getJsonSource()
-    {
-        JsonSource jsonSource = new JsonSource();
-        return jsonSource;
-    }
 
     @Bean(name = "parse-json")
     public MongoDbReader getMongoDbReader()
     {
-        MongoDbReader mongoReader = new MongoDbReader(getJsonSource(), getFixmlModel());
+        MongoDbReader mongoReader = new MongoDbReader(jsonSource, fixmlModel);
         return mongoReader;
     }
 
