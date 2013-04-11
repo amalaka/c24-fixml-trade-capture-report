@@ -55,7 +55,12 @@
     </integration:channel>
 
     <integration:channel id="exception-channel"/>
-    <integration:chain id="c24-save-xml" input-channel="exception-channel" output-channel="output-channel">
+    <integration:chain id="c24-save-xml" input-channel="exception-channel" output-channel="invalid-file-queue">
         <integration:service-activator ref="xml-converter" method="convert"/>
+        <integration:service-activator ref="compass-file-store" method="storeInvalidFileAsXML"/>
     </integration:chain>
+
+    <integration:channel id="invalid-file-queue">
+            <integration:queue/>
+        </integration:channel>
 </beans>
