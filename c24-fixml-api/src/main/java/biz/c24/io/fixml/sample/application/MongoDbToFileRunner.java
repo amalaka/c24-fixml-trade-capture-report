@@ -1,7 +1,6 @@
 package biz.c24.io.fixml.sample.application;
 
 import biz.c24.io.fixml.sample.configuration.C24MongoDbPollerConfiguration;
-import biz.c24.io.fixml.sample.configuration.C24ExternalPropertiesConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -29,8 +28,7 @@ public class MongoDbToFileRunner {
     private void loadSpringContainer() {
         try {
             AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-            
-            applicationContext.register(C24ExternalPropertiesConfiguration.class);
+
             applicationContext.register(C24MongoDbPollerConfiguration.class);
             applicationContext.refresh();
 

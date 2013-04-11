@@ -11,6 +11,7 @@ import org.fixprotocol.fixml44.FIXMLElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 import java.io.File;
@@ -24,6 +25,8 @@ import java.io.File;
 @ImportResource(value = {
         "classpath:META-INF/spring/flow-db-read.xml"
 })
+@Import(C24ExternalPropertiesConfiguration.class)
+
 @Configuration
 public class C24MongoDbPollerConfiguration {
 
