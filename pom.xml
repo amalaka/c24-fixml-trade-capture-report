@@ -35,7 +35,7 @@
     </modules>
 
     <properties>
-        <c24.api.version>4.2.2-SNAPSHOT</c24.api.version>
+        <c24.api.version>4.3.0-SNAPSHOT</c24.api.version>
         <junit.version>4.11</junit.version>
     </properties>
 
