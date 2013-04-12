@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<transform IOversion="3.1.0" encrypted="false" processingOrder="Outputs" readOnly="false" saveLayout="true" validateInputs="false" validateOutputs="false" name="FixmlTradeCaptureToCompass.tfd">
+  <input endID="0" modelRef="../../../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-components-base-4-4.dod" path="" required="false" typeRef="#FIXML"></input>
+  <output endID="0" modelRef="compass.dod" path="" required="false" typeRef="#Document Root"></output>
+  <transformTestSuite></transformTestSuite>
+</transform>
