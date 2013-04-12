@@ -44,11 +44,9 @@ public class MongoDbCollectionWrapperImpl<T extends ComplexDataObject> implement
         
         try {
             LOG.info("Attempting to store ["+mongoDBCollection.getFullName()+"] a C24 ComplexDataObject...");
-            
             StringWriter writer = new StringWriter();
             sink.setWriter(writer);
             sink.writeObject(complexDataObject);
-            
             mongoDBCollection.save((BasicDBObject) JSON.parse(writer.toString()));
             LOG.info("Stored a new ComplexDataObject in ["+mongoDBCollection.getFullName()+"].");
             return complexDataObject;
