@@ -34,8 +34,12 @@
     <integration:chain id="transformer-chain" input-channel="c24-transformer-channel" output-channel="compass-store-channel">
         <integration:service-activator ref="debug"/>
         <!-- Insert C24 iO transform -->
+        <c24:transformer transform-class="biz.c24.io.trdcaptrpt.to.compass.FixmlTradeCaptureToCompassTransform"
+                         always-return-array="false"/>
         <!-- Call c24 validation -->
+        <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
         <!-- Optional: route failures into exception management channel -->
+
     </integration:chain>
     
     <!-- Compass store channel defined in: gem-store-compass.xml -->

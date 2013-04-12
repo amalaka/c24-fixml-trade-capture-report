@@ -1,6 +1,28 @@
 <?xml version="1.0" ?>
 <transform IOversion="3.1.0" encrypted="false" processingOrder="Outputs" readOnly="false" saveLayout="true" validateInputs="false" validateOutputs="false" name="FixmlTradeCaptureToCompass.tfd">
-  <input endID="0" modelRef="../../../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-components-base-4-4.dod" path="" required="false" typeRef="#FIXML"></input>
+  <input endID="0" modelRef="../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-components-base-4-4.dod" path="" required="false" typeRef="#FIXML"></input>
+  <contextPath contextRef="Message!TrdCaptRpt/@TradeCaptureReportAttributes/@RptID" endID="0" input="true" id="fill_idO00000">
+    <additionalModelRef>../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-tradecapture-base-4-4.dod</additionalModelRef>
+  </contextPath>
+  <contextPath contextRef="Message!TrdCaptRpt/@TradeCaptureReportAttributes/@TxnTm" endID="0" input="true" id="fill_transactionTimeO00000">
+    <additionalModelRef>../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-tradecapture-base-4-4.dod</additionalModelRef>
+  </contextPath>
+  <contextPath contextRef="Message!TrdCaptRpt/TradeCaptureReportElements/Amt/@PositionAmountDataAttributes/@Amt" endID="0" input="true" id="fill_priceO00000">
+    <additionalModelRef>../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-tradecapture-base-4-4.dod</additionalModelRef>
+  </contextPath>
+  <contextPath contextRef="Message!TrdCaptRpt/TradeCaptureReportElements/OrdQty/@OrderQtyDataAttributes/@Qty" endID="0" input="true" id="fill_quantityO0000000">
+    <additionalModelRef>../../../../My IO Projects/Standards Libraries/FIX/FIXML/FIXML 4.4/fixml-tradecapture-base-4-4.dod</additionalModelRef>
+  </contextPath>
+  <contextPath contextRef="fill/@id" endID="0" input="false" id="fill_idO000"></contextPath>
+  <contextPath contextRef="fill/@price" endID="0" input="false" id="fill_priceO000"></contextPath>
+  <contextPath contextRef="fill/@quantity" endID="0" input="false" id="fill_quantityO000"></contextPath>
+  <transformMethod name="CAST" type="#number_integer" x="200" y="200" id="fill_quantityO00000"></transformMethod>
+  <contextPath contextRef="fill/@transactionTime" endID="0" input="false" id="fill_transactionTimeO000"></contextPath>
+  <translation inputID="fill_idO00000" inputPort="0" outputID="fill_idO000" outputPort="0"></translation>
+  <translation inputID="fill_priceO00000" inputPort="0" outputID="fill_priceO000" outputPort="0"></translation>
+  <translation inputID="fill_quantityO00000" inputPort="0" outputID="fill_quantityO000" outputPort="0"></translation>
+  <translation inputID="fill_quantityO0000000" inputPort="0" outputID="fill_quantityO00000" outputPort="0"></translation>
+  <translation inputID="fill_transactionTimeO00000" inputPort="0" outputID="fill_transactionTimeO000" outputPort="0"></translation>
   <output endID="0" modelRef="compass.dod" path="" required="false" typeRef="#Document Root"></output>
   <transformTestSuite></transformTestSuite>
 </transform>
