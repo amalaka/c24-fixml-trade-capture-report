@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.integration.annotation.Transformer;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 import static org.springframework.util.Assert.notNull;
@@ -43,9 +44,11 @@ public class MongoDbCollectionWrapperImpl<T extends ComplexDataObject> implement
         
         try {
             LOG.info("Attempting to store ["+mongoDBCollection.getFullName()+"] a C24 ComplexDataObject...");
+            
             StringWriter writer = new StringWriter();
             sink.setWriter(writer);
             sink.writeObject(complexDataObject);
+            
             mongoDBCollection.save((BasicDBObject) JSON.parse(writer.toString()));
             LOG.info("Stored a new ComplexDataObject in ["+mongoDBCollection.getFullName()+"].");
             return complexDataObject;
@@ -60,7 +63,12 @@ public class MongoDbCollectionWrapperImpl<T extends ComplexDataObject> implement
 
     @Transformer
     @Override
-    public T query(String query) {
+    public T query(String message) {
+
+        StringReader reader = new StringReader(message);
+        source.setReader(reader);
+        //ComplexDataObject cdo = source.readObject(element);        
+        
         // TODO: implement.
         throw new UnsupportedOperationException("not yet implemented.");
     }
