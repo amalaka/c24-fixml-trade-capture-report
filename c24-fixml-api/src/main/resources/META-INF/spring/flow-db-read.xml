@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:integration="http://www.springframework.org/schema/integration"
+       xmlns:c24="http://schema.c24.biz/spring-integration"
+       xmlns:file="http://www.springframework.org/schema/integration/file"
+       xmlns:int-mongodb="http://www.springframework.org/schema/integration/mongodb"
+       xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+       xsi:schemaLocation="http://www.springframework.org/schema/data/mongo
+    http://www.springframework.org/schema/data/mongo/spring-mongo-1.1.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://schema.c24.biz/spring-integration
+    http://schema.c24.biz/spring-integration.xsd
+    http://www.springframework.org/schema/integration/mongodb
+    http://www.springframework.org/schema/integration/mongodb/spring-integration-mongodb-2.2.xsd
+    http://www.springframework.org/schema/integration/file
+    http://www.springframework.org/schema/integration/file/spring-integration-file.xsd
+    ">
+
+    <integration:message-history/>
+
+    <mongo:db-factory id="mongoDbFactory" dbname="${mongo.db.name}"/>
+
+    <int-mongodb:inbound-channel-adapter id="mongo-inbound-adapter"
+           collection-name="${mongo.collection.fixml.name}"
+           channel="input-channel"
+           query="{ 'FIXML.TrdCaptRpt.TradeCaptureReportElements.Instrmt.@attributes.StrkCcy' : 'GBP' }"
+           expect-single-result="true"
+           auto-startup="true">
+    		<integration:poller fixed-rate="1000" max-messages-per-poll="10"/>
+    </int-mongodb:inbound-channel-adapter>
+
+    <integration:channel id="input-channel" />
+    <integration:chain id="db-parser-chain" input-channel="input-channel" output-channel="enricher-channel">
+        <integration:service-activator ref="parse-json" method="parse"/>
+        <c24:validating-header-enricher fail-events="true" statistics="false" pass-events="false"/>
+        <integration:filter expression="headers[c24_valid]" discard-channel="exception-channel"/>
+    </integration:chain>
+
+    <integration:channel id="enricher-channel"/>
+    <integration:chain id="enricher-chain" input-channel="enricher-channel" output-channel="output-channel">
+        <integration:service-activator ref="header-enricher" method="enrich"/>
+    </integration:chain>
+
+    <integration:chain id="file-saving-chain" input-channel="output-channel" output-channel="valid-file-queue">
+        <integration:service-activator ref="xml-converter" method="convert"/>
+        <integration:service-activator ref="compass-file-store" method="storeValidFileAsXML"/>
+    </integration:chain>
+
+    <integration:channel id="valid-file-queue">
+        <integration:queue/>
+    </integration:channel>
+
+    <integration:channel id="exception-channel"/>
+    <integration:chain id="c24-save-xml" input-channel="exception-channel" output-channel="invalid-file-queue">
+        <integration:service-activator ref="xml-converter" method="convert"/>
+        <integration:service-activator ref="compass-file-store" method="storeInvalidFileAsXML"/>
+    </integration:chain>
+
+    <integration:channel id="invalid-file-queue">
+            <integration:queue/>
+        </integration:channel>
+</beans>
