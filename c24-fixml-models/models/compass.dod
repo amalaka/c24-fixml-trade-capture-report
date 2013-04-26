@@ -1,0 +1,305 @@
+<?xml version="1.0" ?>
+<dataModel IOversion="3.1.0" attributeFormDefault="Unqualified" elementFormDefault="Qualified" encoding="UTF-8" encrypted="false" hibernateIDGeneratorMethodDefault="native" inputMask="XML" outputMask="XML" targetNamespace="http://compass.fopp.ib.jpmc.com/xml" userVersion="1.0" name="compass.dod" version="0.0.1">
+  <type>
+    <atomicSimpleType baseType="#string" name="Side">
+      <enumeration caseSensitive="true" name="Side">
+        <value value="BUY"></value>
+        <value value="SELL"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <atomicSimpleType baseType="#number_decimal" name="Price">
+      <facet facetType="max_fraction_digits">
+        <value>8</value>
+      </facet>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <atomicSimpleType baseType="#string" name="FillState">
+      <enumeration caseSensitive="true" name="FillState">
+        <value value="NEW"></value>
+        <value value="MATCHED"></value>
+        <value value="CLEARED"></value>
+        <value value="ALLOCATED"></value>
+        <value value="CANCELLED"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="FillBase">
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="clearingHouseId"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="parentId"></attribute>
+      <attribute max="1" min="0" typeRef="#number_integer" name="quantity"></attribute>
+      <attribute max="1" min="0" typeRef="Price" name="price"></attribute>
+      <attribute max="1" min="0" typeRef="Side" name="side"></attribute>
+      <attribute max="1" min="0" typeRef="#date_datetime" name="transactionTime"></attribute>
+      <attribute max="1" min="0" typeRef="FillState" name="state"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="executingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="clearingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="account"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="exchangeTradeId"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="exchangeOrderId"></attribute>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="Fill" name="fill"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="FillBase" name="Fill">
+      <validationRule severity="Error" name="New Validation Rule">
+        <transform>
+          <trigger>false</trigger>
+          <transformation IOversion="3.1.0" encrypted="false" processingOrder="Outputs" readOnly="false" saveLayout="true" targetNamespace="http://compass.fopp.ib.jpmc.com/xml" validateInputs="false" validateOutputs="false" name="New Validation Rule">
+            <input endID="0" modelRef="compass.dod" path="" required="false" typeRef="Fill"></input>
+            <contextPath contextRef="" endID="0" input="false" id="O000"></contextPath>
+            <transformMethod name="GREATERTHAN" x="243" y="144" id="O00000"></transformMethod>
+            <transformMethod name="LENGTH" x="170" y="61" id="O0000000"></transformMethod>
+            <constant constant="10" id="O0000001"></constant>
+            <contextPath contextRef="@id" endID="0" input="true" id="O000000000"></contextPath>
+            <translation inputID="O00000" inputPort="0" outputID="O000" outputPort="0"></translation>
+            <translation inputID="O0000000" inputPort="0" outputID="O00000" outputPort="0"></translation>
+            <translation inputID="O000000000" inputPort="0" outputID="O0000000" outputPort="0"></translation>
+            <translation inputID="O0000001" inputPort="0" outputID="O00000" outputPort="1"></translation>
+            <output alias="result" endID="0" path="" required="false" typeRef="#boolean"></output>
+          </transformation>
+          <errorMessage>null</errorMessage>
+        </transform>
+      </validationRule>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="FillBase" name="CreateExecution"></complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="CreateExecution" name="createExecution"></element>
+  <type>
+    <atomicSimpleType baseType="#string" name="AllocationState">
+      <enumeration caseSensitive="true" name="AllocationState">
+        <value value="NEW"></value>
+        <value value="MATCHED"></value>
+        <value value="ALLOCATED"></value>
+        <value value="PENDING"></value>
+        <value value="COMPLETE"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocationBase">
+      <element identifier="false" max="-1" min="0" typeRef="Execution" name="execution"></element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="aggregateId"></attribute>
+      <attribute max="1" min="0" typeRef="#number_integer" name="allocatedQuantity"></attribute>
+      <attribute max="1" min="0" typeRef="Price" name="price"></attribute>
+      <attribute max="1" min="0" typeRef="AllocationState" name="state"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="executingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="clearingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="account"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="AllocationBase" name="Allocation"></complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="Allocation" name="allocation"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="ClientAggregate">
+      <element identifier="false" max="-1" min="0" typeRef="Allocation" name="allocation"></element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="#number_integer" name="aggregateQuantity"></attribute>
+      <attribute max="1" min="0" typeRef="AllocationState" name="state"></attribute>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="ClientAggregate" name="clientAggregate"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="Order">
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="Price" name="averagePrice"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <atomicSimpleType baseType="#string" name="ExecutionState">
+      <enumeration caseSensitive="true" name="ExecutionState">
+        <value value="NEW"></value>
+        <value value="MATCHED"></value>
+        <value value="CLEARED"></value>
+        <value value="ALLOCATED"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="ExecutionBase">
+      <element identifier="false" max="1" min="1" typeRef="Order" name="order"></element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="Price" name="price"></attribute>
+      <attribute max="1" min="0" typeRef="#number_integer" name="quantity"></attribute>
+      <attribute max="1" min="0" typeRef="Side" name="side"></attribute>
+      <attribute max="1" min="0" typeRef="#date_datetime" name="transactionTime"></attribute>
+      <attribute max="1" min="0" typeRef="ExecutionState" name="state"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="executingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="clearingBroker"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="account"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="exchangeTradeId"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="exchangeOrderId"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="ExecutionBase" name="Execution"></complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="Execution" name="execution"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="ExecutionBase" name="ClearingStatus"></complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="ClearingStatus" name="clearingStatus"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="FillExecutionMatch">
+      <element identifier="false" max="-1" min="1" typeRef="Fill" name="fill"></element>
+      <element identifier="false" max="-1" min="1" typeRef="Execution" name="execution"></element>
+      <attribute max="1" min="0" typeRef="#date_datetime" name="timeStamp"></attribute>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="FillExecutionMatch" name="fillExecutionMatch"></element>
+  <type>
+    <atomicSimpleType baseType="#string" name="AllocatedState">
+      <enumeration caseSensitive="true" name="AllocatedState">
+        <value value="NEW"></value>
+        <value value="PENDING"></value>
+        <value value="COMPLETE"></value>
+        <value value="REJECTED"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocationBreakdown">
+      <element identifier="false" max="1" min="1" typeRef="Allocation" name="allocation"></element>
+      <attribute max="1" min="0" typeRef="#number_integer" name="allocatedQty"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="AllocationBreakdown" name="AllocatedQuantity"></complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocatedExecution">
+      <element identifier="false" max="1" min="1" typeRef="AllocatedState" name="state"></element>
+      <element identifier="false" max="1" min="1" typeRef="Execution" name="execution"></element>
+      <element identifier="false" group="true" max="1" min="1" name="AllocatedExecution-SG1">
+        <type>
+          <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Element group" specifyStructure="true" name="AllocatedExecution-SG1">
+            <element identifier="false" max="-1" min="1" typeRef="AllocatedQuantity" name="allocations"></element>
+          </complexType>
+        </type>
+      </element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="AllocatedExecution" name="allocatedExecution"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocatedFill">
+      <element identifier="false" max="1" min="1" typeRef="AllocatedState" name="state"></element>
+      <element identifier="false" max="1" min="1" typeRef="Fill" name="fill"></element>
+      <element identifier="false" group="true" max="1" min="1" name="AllocatedFill-SG1">
+        <type>
+          <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Element group" specifyStructure="true" name="AllocatedFill-SG1">
+            <element identifier="false" max="-1" min="1" typeRef="AllocatedQuantity" name="allocations"></element>
+          </complexType>
+        </type>
+      </element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="AllocatedFill" name="allocatedFill"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocationExecutionMatch">
+      <element identifier="false" max="-1" min="1" typeRef="#string" name="execution"></element>
+      <attribute max="1" min="0" typeRef="#string" name="allocationId"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="ClearingHouseRequest">
+      <element identifier="false" max="1" min="1" typeRef="AllocatedState" name="state"></element>
+      <element identifier="false" max="1" min="1" typeRef="Fill" name="fill"></element>
+      <element identifier="false" max="-1" min="1" typeRef="AllocationAction" name="allocationActions"></element>
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="true" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="AllocationAction">
+      <attribute max="1" min="0" typeRef="#string" name="id"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="broker"></attribute>
+      <attribute max="1" min="0" typeRef="#number_integer" name="quantity"></attribute>
+      <attribute max="1" min="0" typeRef="#string" name="account"></attribute>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="AllocationAction" name="Claim"></complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="AllocationAction" name="GiveUp"></complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="AllocationAction" name="TakeUp"></complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="ClearingHouseRequest" name="clearingHouseRequest"></element>
+  <type>
+    <atomicSimpleType baseType="#string" name="BreachState">
+      <enumeration caseSensitive="true" name="BreachState">
+        <value value="RAISED"></value>
+        <value value="CLEARED"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="BaseSLABreach">
+      <element identifier="false" max="1" min="1" typeRef="#number_long" name="eventRaised"></element>
+      <element identifier="false" max="1" min="1" typeRef="BreachState" name="state"></element>
+      <element identifier="false" max="1" min="1" typeRef="#string" name="breachId"></element>
+    </complexType>
+  </type>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="BaseSLABreach" name="ClaimFromExchangeBreach">
+      <element identifier="false" max="1" min="1" typeRef="ClearingHouseRequest" name="claim"></element>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="ClaimFromExchangeBreach" name="claimFromExchangeBreach"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="BaseSLABreach" name="UnmatchedFillBreach">
+      <element identifier="false" max="1" min="1" typeRef="Fill" name="fill"></element>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="UnmatchedFillBreach" name="unmatchedFillBreach"></element>
+  <type>
+    <complexType abstract="false" contentModel="Sequence" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="BaseSLABreach" name="UnmatchedExecutionBreach">
+      <element identifier="false" max="1" min="1" typeRef="Execution" name="execution"></element>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" typeRef="UnmatchedExecutionBreach" name="unmatchedExecutionBreach"></element>
+  <type>
+    <complexType abstract="false" contentModel="Choice" derivationMethod="Extension" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" baseType="BaseSLABreach" name="ClearBreach">
+      <element identifier="false" max="1" min="1" typeRef="UnmatchedExecutionBreach" name="unmatchedExecution"></element>
+      <element identifier="false" max="1" min="1" typeRef="UnmatchedFillBreach" name="unmatchedFill"></element>
+      <element identifier="false" max="1" min="1" typeRef="ClaimFromExchangeBreach" name="claimFromExchange"></element>
+    </complexType>
+  </type>
+  <element identifier="false" max="1" min="1" name="RiskCheckResponse">
+    <type>
+      <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="RiskCheckResponse">
+        <element identifier="false" max="1" min="1" typeRef="Fill" name="giveIn"></element>
+        <attribute max="1" min="0" typeRef="RiskCheckResult" name="result"></attribute>
+      </complexType>
+    </type>
+  </element>
+  <element identifier="false" max="1" min="1" name="RiskCheckRequest">
+    <type>
+      <complexType abstract="false" contentModel="Sequence" excludeFromDatabase="false" processAsBatch="false" specialisation="Generic complex" specifyStructure="true" name="RiskCheckRequest">
+        <element identifier="false" max="1" min="1" typeRef="Fill" name="giveIn"></element>
+      </complexType>
+    </type>
+  </element>
+  <type>
+    <atomicSimpleType baseType="#string" name="RiskCheckResult">
+      <enumeration caseSensitive="true" name="RiskCheckResult">
+        <value value="PASSED"></value>
+        <value value="FAILED"></value>
+      </enumeration>
+    </atomicSimpleType>
+  </type>
+  <namespace prefix="" uri="http://compass.fopp.ib.jpmc.com/xml"></namespace>
+  <namespace prefix="xsd" uri="http://www.w3.org/2001/XMLSchema"></namespace>
+</dataModel>

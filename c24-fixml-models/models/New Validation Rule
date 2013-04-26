@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<transform xmlns="http://www.c24.biz/io/transformation/schema/v3x" IOversion="3.1.0" encrypted="false" processingOrder="Outputs" readOnly="false" saveLayout="true" targetNamespace="http://compass.fopp.ib.jpmc.com/xml" validateInputs="false" validateOutputs="false" name="New Validation Rule">
+    <input endID="0" modelRef="compass.dod" path="" required="false" typeRef="Fill"/>
+    <contextPath contextRef="" endID="0" input="false" id="O000"/>
+    <transformMethod name="GREATERTHAN" x="243" y="144" id="O00000"/>
+    <transformMethod name="LENGTH" x="170" y="61" id="O0000000"/>
+    <constant constant="10" id="O0000001"/>
+    <contextPath contextRef="@id" endID="0" input="true" id="O000000000"/>
+    <translation inputID="O00000" inputPort="0" outputID="O000" outputPort="0"/>
+    <translation inputID="O0000000" inputPort="0" outputID="O00000" outputPort="0"/>
+    <translation inputID="O000000000" inputPort="0" outputID="O0000000" outputPort="0"/>
+    <translation inputID="O0000001" inputPort="0" outputID="O00000" outputPort="1"/>
+    <output alias="result" endID="0" path="" required="false" typeRef="#boolean"/>
+</transform>
